@@ -32,7 +32,7 @@ col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
     st.subheader("Resources")
-    n_resources = st.selectbox('#Resources',list(range(1,3)),index=1)
+    n_resources = st.selectbox('#Resources',list(range(1,4)),index=1)
 
 with col2:
     st.subheader("Products")
@@ -44,10 +44,10 @@ with col2:
     )
 with col3:
     st.subheader("Orders")
-    n_orders = st.selectbox('#Orders',list(range(1,31)),index=29)
+    n_orders = st.selectbox('#Orders',list(range(1,51)),index=29)
     min_product_type, max_product_type = st.select_slider(
         "Select min/max product type per order",
-        options=list(range(max(11,n_products))),
+        options=list(range(min(11,n_products))),
         value=(2, 4),
     )
     min_product_amt, max_product_amt = st.select_slider(
