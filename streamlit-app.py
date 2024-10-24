@@ -142,14 +142,16 @@ with col2:
             # The problem data is written to an .lp file
             prob.writeLP("nxp.lp")
             st.write(f"Model built with: {n_resources} Resources, {n_products} Products, {n_orders} Orders!")
+            with open("nxp.lp", "rb") as file:
+                btn = st.download_button(
+                    label="Download model",
+                    data=file,
+                    file_name="nxp.lp"
+                )
+            
         except:
             st.write(f"Oops:/")
 
+if st.button("BUILD MODEL", type="primary"):
+    st.header('models')
 
-with open("nxp.lp", "rb") as file:
-    btn = st.download_button(
-        label="Download image",
-        data=file,
-        file_name="nxp.lp",
-        mime="image/png",
-    )
