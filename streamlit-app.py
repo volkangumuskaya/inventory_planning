@@ -205,3 +205,5 @@ if st.session_state.show_solve_section:
                 })
             st.dataframe(df)
             st.dataframe(summary_df)
+        except:
+            st.header('oops')
