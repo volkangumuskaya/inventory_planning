@@ -31,11 +31,11 @@ col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
     st.subheader("Resources")
-    n_resources = st.selectbox('#Resources',list(range(1,3)),index=2)
+    n_resources = st.selectbox('#Resources',list(range(1,3)),index=1)
 
 with col2:
     st.subheader("Products")
-    n_products = st.selectbox('#Products',list(range(1,6)),index=5)
+    n_products = st.selectbox('#Products',list(range(1,6)),index=4)
     min_resource_needed, max_resource_needed = st.select_slider(
         "Select min/max resources needed per product",
         options=list(range(21)),
