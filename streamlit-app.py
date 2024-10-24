@@ -20,14 +20,9 @@ st.set_page_config(
 )
 # Set the title that appears at the top of the page.
 st.image('images/el-chalten-min.jpg','El Chalten, Patagonia')
+st.header('A multi-horizon planning tool ', divider=True)
 '''
-# A multi-horizon planning tool 
-
-This is an example tool to create and solve an inventory planning problem with time periods. 
-
-Enter problem parameters and press 'Build' to generate a model. 
-
-Upon doing so, you may download the model as txt file and Solve.
+This is an example tool to create and solve an inventory planning problem with time periods. Enter problem parameters and press 'Build' to generate a model. Upon doing so, you may download the model as txt file and Solve.
 '''
 # st.sidebar.header("About",divider='orange')
 # with st.sidebar:
@@ -39,6 +34,9 @@ st.header('Problem parameters', divider=True)
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
+    st.subheader("Number of time periods")
+    n_time_periods = st.selectbox('#Time periods',list(range(1,4)),index=1)
+    time_ids=list(range(2))
     st.subheader("Resources")
     n_resources = st.selectbox('#Resources',list(range(1,4)),index=1)
 
@@ -71,7 +69,7 @@ with col2:
         try:
             random.seed(42)
             #Set of periods
-            time_ids=[0,1,2]
+            
             unit_delay_cost=unit_delay_cost
 
             ##GENERATE MAIN COMPONENTS RANDOMLY
