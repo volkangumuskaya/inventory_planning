@@ -16,7 +16,6 @@ if "show_solve_section" not in st.session_state:
 st.set_page_config(
     page_title='volkan-ai',
     layout="wide",
-    page_icon=':gear:', # This is an emoji shortcode. Could be a URL too.
     # page_icon="images/weather_icon.png"
 )
 
@@ -43,7 +42,7 @@ with col2:
     )
 with col3:
     st.subheader("Orders")
-    n_orders = st.selectbox('#Orders',list(range(1,31)))
+    n_orders = st.selectbox('#Orders',list(range(1,31)),index=len(29)
     min_product_type, max_product_type = st.select_slider(
         "Select min/max product type per order",
         options=list(range(max(11,n_products))),
@@ -142,7 +141,7 @@ with col2:
                             )
             # The problem data is written to an .lp file
             prob.writeLP("nxp.lp")
-            st.write(f"Model built with: {n_resources} Resources, {n_products} Products, {n_orders} Orders!")
+            st.success(f"Model built with: {n_resources} Resources, {n_products} Products, {n_orders} Orders!")
             with open("nxp.lp", "rb") as file:
                 btn = st.download_button(
                     label="Download model",
@@ -159,7 +158,6 @@ with col2:
 # Execute the new section logic if the button was pressed
 if st.session_state.show_solve_section:
     if st.button("SOLVE MODEL", type="primary"):     
-        st.write('Problem tring!')
         # The problem is solved using PuLP's choice of Solver
         prob=st.session_state.problem
                 
@@ -199,14 +197,12 @@ if st.session_state.show_solve_section:
         # Use a lambda function to apply the mapping based on the var_name prefix
         df['VarType'] = df['var_name'].apply(lambda x: next((var_type for prefix, var_type in prefix_to_var_type.items() if x.startswith(prefix)), None))
         
-        summary_df=pd.DataFrame({
-            'name':['Total_cost','Total_delay_cost','Production_cost','n_vars','n_constraints'],
-            'value':[value(prob.objective),
-                     df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
-                     value(prob.objective)-df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
-                     len(prob.variables()),
-                     len(prob.constraints)]
-            })
+        summary_df=pd.DataFrame({'name':['Total_production_cost','Total_delays','n_vars','n_constraints'],
+                                'value':[value(prob.objective)-df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
+                                         df[(df.VarType=='Order_delay')].var_value.sum(),
+                                         len(prob.variables()),
+                                         len(prob.constraints)]
+                                })
         col1, col2 = st.columns([1, 1])
         with col1:
             st.subheader('Summary of solution')
