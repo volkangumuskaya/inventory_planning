@@ -157,53 +157,51 @@ with col2:
 
 # Execute the new section logic if the button was pressed
 if st.session_state.show_solve_section:
-    if st.button("SOLVE MODEL", type="primary"):
-        try:      
-            # The problem is solved using PuLP's choice of Solver
-            prob.solve()
-            st.write('Problem solved !')
-            
-            # #Each variable printed
-            # for v in sorted(prob.variables(), key=lambda x: x.name):
-            #     if v.varValue > 0:
-            #         print(v.name, "=", v.varValue)
-            
-            # # n variables
-            # print("# variables = ", len(prob.variables()))
-            # # The optimised objective function value is printed to the screen
-            # print("# constraints = ", len(prob.constraints))
-            # # The optimised objective function value is printed to the screen
-            # print("Total Cost = ", value(prob.objective))
-            
-            #extract info
-            import pandas as pd           
-            # Collect the variables and their values in a dictionary
-            all_variables = {v.name: v.varValue for v in prob.variables()}
-            
-            # Convert the dictionary to a pandas DataFrame
-            df = pd.DataFrame(list(all_variables.items()), columns=['var_name', 'var_value'])
-            
-            #Create VarTypes
-            # Define a dict for mapping prefixes to their respective VarType values
-            prefix_to_var_type = {
-                'order_delay': 'Order_delay',
-                'starting_inventory': 'starting_inventory',
-                'order_fulfillment': 'order_fulfillment',
-                'resource_production': 'resource_production'
-            }
-            
-            # Use a lambda function to apply the mapping based on the var_name prefix
-            df['VarType'] = df['var_name'].apply(lambda x: next((var_type for prefix, var_type in prefix_to_var_type.items() if x.startswith(prefix)), None))
-            
-            summary_df=pd.DataFrame({
-                'name':['Total_cost','Total_delay_cost','Production_cost','n_vars','n_constraints'],
-                'value':[value(prob.objective),
-                         df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
-                         value(prob.objective)-df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
-                         len(prob.variables()),
-                         len(prob.constraints)]
-                })
-            st.dataframe(df)
-            st.dataframe(summary_df)
-        except:
-            st.header('oops')
+    if st.button("SOLVE MODEL", type="primary"):     
+        # The problem is solved using PuLP's choice of Solver
+        prob.solve()
+        st.write('Problem solved !')
+        
+        # #Each variable printed
+        # for v in sorted(prob.variables(), key=lambda x: x.name):
+        #     if v.varValue > 0:
+        #         print(v.name, "=", v.varValue)
+        
+        # # n variables
+        # print("# variables = ", len(prob.variables()))
+        # # The optimised objective function value is printed to the screen
+        # print("# constraints = ", len(prob.constraints))
+        # # The optimised objective function value is printed to the screen
+        # print("Total Cost = ", value(prob.objective))
+        
+        #extract info
+        import pandas as pd           
+        # Collect the variables and their values in a dictionary
+        all_variables = {v.name: v.varValue for v in prob.variables()}
+        
+        # Convert the dictionary to a pandas DataFrame
+        df = pd.DataFrame(list(all_variables.items()), columns=['var_name', 'var_value'])
+        
+        #Create VarTypes
+        # Define a dict for mapping prefixes to their respective VarType values
+        prefix_to_var_type = {
+            'order_delay': 'Order_delay',
+            'starting_inventory': 'starting_inventory',
+            'order_fulfillment': 'order_fulfillment',
+            'resource_production': 'resource_production'
+        }
+        
+        # Use a lambda function to apply the mapping based on the var_name prefix
+        df['VarType'] = df['var_name'].apply(lambda x: next((var_type for prefix, var_type in prefix_to_var_type.items() if x.startswith(prefix)), None))
+        
+        summary_df=pd.DataFrame({
+            'name':['Total_cost','Total_delay_cost','Production_cost','n_vars','n_constraints'],
+            'value':[value(prob.objective),
+                     df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
+                     value(prob.objective)-df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
+                     len(prob.variables()),
+                     len(prob.constraints)]
+            })
+        st.dataframe(df)
+        st.dataframe(summary_df)
+
