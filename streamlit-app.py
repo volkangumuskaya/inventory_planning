@@ -1,4 +1,4 @@
-import streamlit 
+import streamlit as st
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
