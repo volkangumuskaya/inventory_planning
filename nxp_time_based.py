@@ -145,4 +145,5 @@ summary_df=pd.DataFrame({
              len(prob.constraints)]
     })
 
-
+df.to_csv('test_variables.csv',mode='w',header=True,index=False)
+summary_df.to_csv('test_summary.csv',mode='w',header=True,index=False)
