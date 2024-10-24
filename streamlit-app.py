@@ -44,7 +44,7 @@ with col2:
     )
 with col3:
     st.subheader("Orders")
-    n_orders = st.selectbox('#Orders',list(range(1,31)),index=len(29))
+    n_orders = st.selectbox('#Orders',list(range(1,31)),index=29)
     min_product_type, max_product_type = st.select_slider(
         "Select min/max product type per order",
         options=list(range(max(11,n_products))),
