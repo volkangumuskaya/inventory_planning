@@ -36,7 +36,7 @@ col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
     st.subheader("Number of time periods")
     n_time_periods = st.selectbox('#Time periods',list(range(1,4)),index=1)
-    time_ids=list(range(2))
+    time_ids=list(range(n_time_periods))
     st.subheader("Resources")
     n_resources = st.selectbox('#Resources',list(range(1,4)),index=1)
 
@@ -171,7 +171,7 @@ if st.session_state.show_solve_section:
                 
         prob.solve()
         # After task completes
-        st.success(f"Problem solved with status {LpStatus[prob.status]}!")
+        st.success(f"Problem solved with status: {LpStatus[prob.status]}!")
         
         # #Each variable printed
         # for v in sorted(prob.variables(), key=lambda x: x.name):
