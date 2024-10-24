@@ -146,12 +146,10 @@ with col2:
             st.write(f"Oops:/")
 
 
-# Replace with your GitHub raw file URL
-github_file_url = "https://github.com/volkangumuskaya/inventory_planning/blob/main/nxp.lp"
-file_name = "Download model"
-# Create a link with an icon
-icon = ":file_download:"  # Icon for download
-link = f'<a href="{github_file_url}" download="{file_name}">{icon} {file_name}</a>'
-
-# Display the link
-st.markdown(link, unsafe_allow_html=True)
+with open("nxp.lp", "rb") as file:
+    btn = st.download_button(
+        label="Download image",
+        data=file,
+        file_name="nxp.lp",
+        mime="image/png",
+    )
