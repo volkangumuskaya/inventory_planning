@@ -158,6 +158,7 @@ with col2:
 # Execute the new section logic if the button was pressed
 if st.session_state.show_solve_section:
     if st.button("SOLVE MODEL", type="primary"):     
+        st.write('Problem tring!')
         # The problem is solved using PuLP's choice of Solver
         prob.solve()
         st.write('Problem solved !')
