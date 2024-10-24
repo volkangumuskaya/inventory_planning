@@ -20,7 +20,15 @@ st.set_page_config(
 )
 # Set the title that appears at the top of the page.
 st.image('images/el-chalten-min.jpg','El Chalten, Patagonia')
+'''
+# A multi-horizon planning tool 
 
+This is an example tool to create and solve an inventory planning problem with time periods. 
+
+Enter problem parameters and press 'Build' to generate a model. 
+
+Upon doing so, you may download the model as txt file and Solve.
+'''
 # st.sidebar.header("About",divider='orange')
 # with st.sidebar:
 #     st.image('images/profile_round.png',width=200,caption="https://www.linkedin.com/in/volkangumuskaya/")
