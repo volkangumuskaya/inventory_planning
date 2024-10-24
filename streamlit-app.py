@@ -31,11 +31,11 @@ col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
     st.subheader("Resources")
-    n_resources = st.selectbox('#Resources',list(range(1,3)))
+    n_resources = st.selectbox('#Resources',list(range(1,3)),index=2)
 
 with col2:
     st.subheader("Products")
-    n_products = st.selectbox('#Products',list(range(1,6)))
+    n_products = st.selectbox('#Products',list(range(1,6)),index=5)
     min_resource_needed, max_resource_needed = st.select_slider(
         "Select min/max resources needed per product",
         options=list(range(21)),
@@ -47,7 +47,7 @@ with col3:
     min_product_type, max_product_type = st.select_slider(
         "Select min/max product type per order",
         options=list(range(max(11,n_products))),
-        value=(1, 2),
+        value=(2, 4),
     )
     min_product_amt, max_product_amt = st.select_slider(
         "Select min/max #product per product type",
@@ -164,9 +164,8 @@ if st.session_state.show_solve_section:
         prob=st.session_state.problem
                 
         prob.solve()
-        st.write('Problem solved !')
         # After task completes
-        st.success("Task completed successfully!")
+        st.success(f"Problem solved with status {LpStatus[prob.status]}!")
         
         # #Each variable printed
         # for v in sorted(prob.variables(), key=lambda x: x.name):
@@ -208,6 +207,12 @@ if st.session_state.show_solve_section:
                      len(prob.variables()),
                      len(prob.constraints)]
             })
-        st.dataframe(df)
-        st.dataframe(summary_df)
+        col1, col2 = st.columns([1, 1])
+        with col1:
+            st.subheader('Summary of solution')
+            st.dataframe(summary_df)
+        with col2:
+            st.subheader('Variable values')
+            st.dataframe(df)
+        
 
