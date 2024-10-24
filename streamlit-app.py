@@ -7,7 +7,7 @@ from collections import defaultdict
 
 
 from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
-
+unit_delay_cost=9999
 # Initialize session state for the button click
 if "show_solve_section" not in st.session_state:
     st.session_state.show_solve_section = False
@@ -162,9 +162,16 @@ if st.session_state.show_solve_section:
         st.write('Problem tring!')
         # The problem is solved using PuLP's choice of Solver
         prob=st.session_state.problem
-        st.write('Problem tring 222!')
+        with st.spinner("Executing task... Please wait, this may take some time."):
+            # Simulate a long-running task (unknown duration)
+            # Replace the sleep function with your actual task logic
+            time.sleep(100)  # Example task
+
+        
         prob.solve()
         st.write('Problem solved !')
+        # After task completes
+        st.success("Task completed successfully!")
         
         # #Each variable printed
         # for v in sorted(prob.variables(), key=lambda x: x.name):
