@@ -15,3 +15,16 @@ with st.sidebar:
 '''
 # Example app
 '''
+
+#Show measurements only for selected station
+st.header('Problem parameters', divider=True)
+
+n_resources = st.selectbox(
+    'Select station for latest measurements',
+    [1,2,3])
+
+from_year, to_year = st.select_slider(
+        "Select a range of date",
+        options=range(5),
+        value=(2, 4),
+    )
