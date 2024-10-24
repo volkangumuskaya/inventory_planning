@@ -30,11 +30,11 @@ st.header('Problem parameters', divider=True)
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col1:
-    st.header("Resources")
+    st.subheader("Resources")
     n_resources = st.selectbox('#Resources',list(range(1,3)))
 
 with col2:
-    st.header("Products")
+    st.subheader("Products")
     n_products = st.selectbox('#Products',list(range(1,6)))
     min_resource_needed, max_resource_needed = st.select_slider(
         "Select min/max resources needed per product",
@@ -42,7 +42,7 @@ with col2:
         value=(0, 20),
     )
 with col3:
-    st.header("Orders")
+    st.subheader("Orders")
     n_orders = st.selectbox('#Orders',list(range(1,31)))
     min_product_type, max_product_type = st.select_slider(
         "Select min/max product type per order",
@@ -150,6 +150,7 @@ with col2:
                     file_name="nxp.lp"
                 )
             st.session_state.show_solve_section = True
+            st.session_state.problem=prob
         except:
             st.write(f"Oops:/")
 
@@ -160,6 +161,8 @@ if st.session_state.show_solve_section:
     if st.button("SOLVE MODEL", type="primary"):     
         st.write('Problem tring!')
         # The problem is solved using PuLP's choice of Solver
+        prob=st.session_state.problem
+        st.write('Problem tring 222!')
         prob.solve()
         st.write('Problem solved !')
         
