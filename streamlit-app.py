@@ -162,12 +162,7 @@ if st.session_state.show_solve_section:
         st.write('Problem tring!')
         # The problem is solved using PuLP's choice of Solver
         prob=st.session_state.problem
-        with st.spinner("Executing task... Please wait, this may take some time."):
-            # Simulate a long-running task (unknown duration)
-            # Replace the sleep function with your actual task logic
-            time.sleep(100)  # Example task
-
-        
+                
         prob.solve()
         st.write('Problem solved !')
         # After task completes
