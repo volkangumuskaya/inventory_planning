@@ -7,7 +7,7 @@ from collections import defaultdict
 
 
 from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
-unit_delay_cost=9999
+unit_delay_cost=10000
 # Initialize session state for the button click
 if "show_solve_section" not in st.session_state:
     st.session_state.show_solve_section = False
