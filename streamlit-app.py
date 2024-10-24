@@ -64,7 +64,7 @@ with col2:
             random.seed(42)
             #Set of periods
             time_ids=[0,1,2]
-            unit_delay_cost=10000
+            unit_delay_cost=unit_delay_cost
 
             ##GENERATE MAIN COMPONENTS RANDOMLY
             resources=generate_resources(n_resources=n_resources) #generate resource types
