@@ -208,18 +208,31 @@ if st.session_state.show_solve_section:
                                              len(prob.variables()),
                                              len(prob.constraints)]
                                     })
+            resource_df=pd.DataFrame([obj.__dict__ for obj in resources])
+            product_df=pd.DataFrame([obj.__dict__ for obj in products])
+            order_df=pd.DataFrame([(obj.order_id,obj.customer_name,obj.deadline,obj.product,obj.total_resource_usage) for obj in orders])
+            order_df.columns=['OrderId','CustomerName','Deadline','ProductType-amount','ResourceType-amount']
+            time_df=pd.DataFrame({'Time periods':time_ids})
             st.session_state.show_output_section=1
 
 if st.session_state.show_output_section:
     col1, col2,col3 = st.columns([1, 1, 1])
+    st.header('Problem parameters', divider=True)
+    with col1:
+        st.dataframe(time_df)
+        st.dataframe(resource_df)
+    with col2:
+        st.dataframe(product_df)
+    with col3:
+        st.dataframe(order_df)
+        
+if st.session_state.show_output_section:      
     with col1:
         st.subheader('Summary of solution')
         st.dataframe(summary_df)
     with col2:
         st.subheader('Variable values')
         st.dataframe(df)
-    with col3:
-        st.subheader('Variable values')
-        st.dataframe(df)
+    
         
 
