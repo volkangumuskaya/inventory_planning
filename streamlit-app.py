@@ -66,11 +66,7 @@ with col3:
         options=list(range(21)),
         value=(10, 20),
     )
-resource_df=pd.DataFrame([obj.__dict__ for obj in resources])
-product_df=pd.DataFrame([obj.__dict__ for obj in products])
-order_df=pd.DataFrame([(obj.order_id,obj.customer_name,obj.deadline,obj.product,obj.total_resource_usage) for obj in orders])
-order_df.columns=['OrderId','CustomerName','Deadline','ProductType-amount','ResourceType-amount']
-time_df=pd.DataFrame({'Time periods':time_ids})  
+
 # Create three columns with custom widths
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
@@ -90,7 +86,13 @@ with col1:
             orders=generate_orders(n_orders=n_orders,products=products,customers=customers,time_periods=time_ids,
                                 min_product_type=min_product_type,max_product_type=max_product_type,
                                 min_product_amt=min_product_amt,max_product_amt=max_product_amt)
-
+            #Create dfs
+            st.session_state.resource_df=pd.DataFrame([obj.__dict__ for obj in resources])
+            st.session_state.product_df=pd.DataFrame([obj.__dict__ for obj in products])
+            st.session_state.order_df=pd.DataFrame([(obj.order_id,obj.customer_name,obj.deadline,obj.product,obj.total_resource_usage) for obj in orders])
+            st.session_state.order_df.columns=['OrderId','CustomerName','Deadline','ProductType-amount','ResourceType-amount']
+            st.session_state.time_df=pd.DataFrame({'Time periods':time_ids})  
+            
             #Calculate total resource for all orders in order to set capacities that will force some delays/avoid trivial solutions
             total_resource_needed=defaultdict(int)
             for o in orders:
@@ -219,12 +221,12 @@ if st.session_state.show_output_section:
     col1, col2,col3 = st.columns([1, 1, 1])
     st.header('Problem parameters', divider=True)
     with col1:
-        st.dataframe(time_df)
-        st.dataframe(resource_df)
+        st.dataframe(st.session_state.time_df)
+        st.dataframe(st.session_state.resource_df)
     with col2:
-        st.dataframe(product_df)
+        st.dataframe(st.session_state.product_df)
     with col3:
-        st.dataframe(order_df)
+        st.dataframe(st.session_state.order_df)
         
 if st.session_state.show_output_section:      
     with col1:
