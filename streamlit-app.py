@@ -64,7 +64,7 @@ with col3:
 
 # Create three columns with custom widths
 col1, col2, col3 = st.columns([1, 1, 1])
-with col2:
+with col1:
     if st.button("BUILD MODEL", type="primary"):
         try:
             random.seed(42)
