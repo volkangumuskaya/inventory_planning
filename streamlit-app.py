@@ -207,8 +207,8 @@ if st.session_state.show_solve_section:
             }
             
             # Use a lambda function to apply the mapping based on the var_name prefix
-            st.session_state.df['VarType'] = df['var_name'].apply(lambda x: next((var_type for prefix, var_type in prefix_to_var_type.items() if x.startswith(prefix)), None))
-            
+            df['VarType'] = df['var_name'].apply(lambda x: next((var_type for prefix, var_type in prefix_to_var_type.items() if x.startswith(prefix)), None))
+            st.session_state.df=df.copy()
             st.session_state.summary_df=pd.DataFrame({'name':['Total_production_cost','Total_delays','n_vars','n_constraints'],
                                     'value':[value(prob.objective)-df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
                                              df[(df.VarType=='Order_delay')].var_value.sum(),
