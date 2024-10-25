@@ -150,18 +150,20 @@ with col2:
             # The problem data is written to an .lp file
             prob.writeLP("nxp.lp")
             st.success(f"Model built with: {n_resources} Resources, {n_products} Products, {n_orders} Orders!")
-            with open("nxp.lp", "rb") as file:
+           
+            st.session_state.show_build_section = True
+            st.session_state.show_solve_section = True
+            st.session_state.problem=prob
+        except:
+            st.write(f"Oops:/")
+#Download model
+if st.session_state.show_solve_section:
+     with open("nxp.lp", "rb") as file:
                 btn = st.download_button(
                     label="Download model",
                     data=file,
                     file_name="nxp.lp"
                 )
-            st.session_state.show_solve_section = True
-            st.session_state.problem=prob
-        except:
-            st.write(f"Oops:/")
-
-
 
 # Execute the new section logic if the button was pressed
 if st.session_state.show_solve_section:
@@ -172,18 +174,6 @@ if st.session_state.show_solve_section:
         prob.solve()
         # After task completes
         st.success(f"Problem solved with status: {LpStatus[prob.status]}!")
-        
-        # #Each variable printed
-        # for v in sorted(prob.variables(), key=lambda x: x.name):
-        #     if v.varValue > 0:
-        #         print(v.name, "=", v.varValue)
-        
-        # # n variables
-        # print("# variables = ", len(prob.variables()))
-        # # The optimised objective function value is printed to the screen
-        # print("# constraints = ", len(prob.constraints))
-        # # The optimised objective function value is printed to the screen
-        # print("Total Cost = ", value(prob.objective))
         
         #extract info
         import pandas as pd           
