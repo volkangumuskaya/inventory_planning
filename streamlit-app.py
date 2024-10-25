@@ -214,7 +214,7 @@ if st.session_state.show_output_section:
         st.subheader('Variable values')
         st.dataframe(df)
     with col3:
-    st.subheader('Variable values')
-    st.dataframe(df)
+        st.subheader('Variable values')
+        st.dataframe(df)
         
 
