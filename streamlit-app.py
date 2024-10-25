@@ -11,6 +11,11 @@ unit_delay_cost=10000
 # Initialize session state for the button click
 if "show_solve_section" not in st.session_state:
     st.session_state.show_solve_section = False
+if "show_build_section" not in st.session_state:
+    st.session_state.show_build_section = False
+if "show_output_section" not in st.session_state:
+    st.session_state.show_output_section = False
+
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
