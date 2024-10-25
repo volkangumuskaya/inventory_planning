@@ -86,7 +86,7 @@ def generate_orders(n_orders,products,customers,time_periods,min_product_type=2,
 
         orders.append(
             Order(order_id=i,
-                  customer_name=random.choice(customers),
+                  customer_name=random.choice(customers).name,
                   deadline=random.choice(time_periods),
                   _product=defaultdict(int, random_products_dict)
             ))
