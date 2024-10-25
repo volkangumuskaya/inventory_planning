@@ -66,7 +66,11 @@ with col3:
         options=list(range(21)),
         value=(10, 20),
     )
-
+resource_df=pd.DataFrame([obj.__dict__ for obj in resources])
+product_df=pd.DataFrame([obj.__dict__ for obj in products])
+order_df=pd.DataFrame([(obj.order_id,obj.customer_name,obj.deadline,obj.product,obj.total_resource_usage) for obj in orders])
+order_df.columns=['OrderId','CustomerName','Deadline','ProductType-amount','ResourceType-amount']
+time_df=pd.DataFrame({'Time periods':time_ids})  
 # Create three columns with custom widths
 col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
@@ -155,11 +159,7 @@ with col1:
             # The problem data is written to an .lp file
             prob.writeLP("nxp.lp")
             st.success(f"Model built with: {n_resources} Resources, {n_products} Products, {n_orders} Orders!")
-            resource_df=pd.DataFrame([obj.__dict__ for obj in resources])
-            product_df=pd.DataFrame([obj.__dict__ for obj in products])
-            order_df=pd.DataFrame([(obj.order_id,obj.customer_name,obj.deadline,obj.product,obj.total_resource_usage) for obj in orders])
-            order_df.columns=['OrderId','CustomerName','Deadline','ProductType-amount','ResourceType-amount']
-            time_df=pd.DataFrame({'Time periods':time_ids})   
+             
             st.session_state.show_build_section = True
             st.session_state.show_solve_section = True
             st.session_state.problem=prob
