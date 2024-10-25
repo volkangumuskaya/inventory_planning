@@ -217,23 +217,29 @@ if st.session_state.show_solve_section:
             
             st.session_state.show_output_section=1
 
-if st.session_state.show_output_section:
-    col1, col2,col3 = st.columns([1, 1, 1])
+if st.session_state.show_solve_section:
     st.header('Problem parameters', divider=True)
+    col1, col2,col3 = st.columns([1, 1, 1])   
     with col1:
+        st.subheader('Time periods')
         st.dataframe(st.session_state.time_df)
+        st.subheader('Resources')
         st.dataframe(st.session_state.resource_df)
     with col2:
+        st.subheader('Products')
         st.dataframe(st.session_state.product_df)
     with col3:
+        st.subheader('Orders')
         st.dataframe(st.session_state.order_df)
         
 if st.session_state.show_output_section:      
+    st.header('Problem parameters', divider=True)
+    col1, col2 = st.columns([1, 1])
     with col1:
         st.subheader('Summary of solution')
         st.dataframe(summary_df)
     with col2:
-        st.subheader('Variable values')
+        st.subheader('Variables')
         st.dataframe(df)
     
         
