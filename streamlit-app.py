@@ -4,7 +4,7 @@ import pandas as pd
 from pulp import LpProblem, LpMinimize, LpVariable, lpSum,LpInteger,LpContinuous,LpBinary,LpStatus,value
 import random
 from collections import defaultdict
-
+import pickle
 
 from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
 unit_delay_cost=10000
@@ -106,6 +106,9 @@ with col1:
             delay_costs=[unit_delay_cost for x in orders]
 
             resource_names=[x.name for x in resources]
+            product_names=[x.name for x in products]
+            order_names=[f'order_{x.order_id}' for x in orders]
+
             resource_costs=[random.randint(a=2,b=8)/10 for _ in resources]
             resource_capacities=[round(total_resource_needed[r]*0.85/len(time_ids),0) for r in resource_ids]
 
@@ -161,7 +164,10 @@ with col1:
             # The problem data is written to an .lp file
             prob.writeLP("nxp.lp")
             st.success(f"Model built with: {n_resources} Resources, {n_products} Products, {n_orders} Orders!")
-             
+
+            with open('problem.pickle', 'wb') as handle:
+                pickle.dump([prob,resource_names,product_names,order_names], handle, protocol=pickle.HIGHEST_PROTOCOL)
+            
             st.session_state.show_build_section = True
             st.session_state.show_solve_section = True
             st.session_state.show_output_section = False
