@@ -17,7 +17,7 @@ if "show_output_section" not in st.session_state:
     st.session_state.show_output_section = False
 
 with open("chat_history.txt", "a") as f:
-        f.write("hello" + "\n")
+    f.write("hello" + "\n")
     st.write('hello')
 
 # Set the title and favicon that appear in the Browser's tab bar.
