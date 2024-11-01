@@ -16,9 +16,9 @@ if "show_build_section" not in st.session_state:
 if "show_output_section" not in st.session_state:
     st.session_state.show_output_section = False
 
-with open("chat_history.txt", "w") as f:
-    st.write('hello')
-    # f.write("hello" + "\n")
+# with open("chat_history.txt", "w") as f:
+#     st.write('hello')
+#     # f.write("hello" + "\n")
 
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
