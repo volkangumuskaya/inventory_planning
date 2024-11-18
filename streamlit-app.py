@@ -19,17 +19,13 @@ from collections import defaultdict
 import pickle
 import os
 print("Main Current Working Directory:", os.getcwd())
-st.write('hi again')
 from subpages import inititate_planning_tool
-st.write('hi again2')
 
 
 
 # Show content based on the selected page
 if page == "Home":
-    st.write('hi again3')
     inititate_planning_tool.show()
-    st.write('hi again4')
 elif page == "About":
     st.title("About Page")
     st.write("This is the about page.")
