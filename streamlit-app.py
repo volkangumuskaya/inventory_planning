@@ -1,17 +1,5 @@
 import streamlit as st
 
-# Inject CSS for minor styling adjustments
-st.markdown("""
-    <style>
-    .css-1aumxhk {
-        font-size: 16px;
-    }
-    .stSidebar > div {
-        padding-top: 20px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
 # Sidebar navigation with direct clickable options
 page = st.sidebar.radio("Navigation", ["Home", "About", "Contact"])
 
