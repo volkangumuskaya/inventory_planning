@@ -78,7 +78,7 @@ def show():
     with col1:
         if st.button("BUILD MODEL", type="primary"):
             try:
-                import pandas as pd
+                # import pandas as pd
                 random.seed(42)
                 #Set of periods
                 
@@ -203,7 +203,7 @@ def show():
                 st.success(f"Problem solved with status: {LpStatus[prob.status]}!")
                 
                 #extract info
-                import pandas as pd           
+                # import pandas as pd           
                 # Collect the variables and their values in a dictionary
                 all_variables = {v.name: v.varValue for v in prob.variables()}
                 
