@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title='volkan-ai',
@@ -12,7 +13,7 @@ page = st.sidebar.radio(
     ["Home", "About", "Contact"]
 )
 # Import the PuLP library
-# import pandas as pd
+
 from pulp import LpProblem, LpMinimize, LpVariable, lpSum,LpInteger,LpContinuous,LpBinary,LpStatus,value
 import random
 from collections import defaultdict
