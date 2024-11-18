@@ -5,9 +5,16 @@ from pulp import LpProblem, LpMinimize, LpVariable, lpSum,LpInteger,LpContinuous
 import random
 from collections import defaultdict
 import pickle
+print('hi1')
+import os
+print("Sub Current Working Directory:", os.getcwd())
+import sys
+from pathlib import Path
 
+# Add the root directory to sys.path
+sys.path.append(str(Path(__file__).parent))
 from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
-
+print('hi2')
 
 def show():
     unit_delay_cost=10000
