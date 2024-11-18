@@ -18,9 +18,11 @@ from data_class_script import Customer, Order, Product, Resource, generate_custo
 st.write('hi again sub3')
 
 def show():
+    st.write('hi again from show 1')
     unit_delay_cost=10000
     # Initialize session state for the button click
     if "show_solve_section" not in st.session_state:
+        st.write('hi again from show 2')
         st.session_state.show_solve_section = False
     if "show_build_section" not in st.session_state:
         st.session_state.show_build_section = False
