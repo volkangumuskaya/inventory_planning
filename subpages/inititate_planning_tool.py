@@ -8,7 +8,7 @@ import pickle
 import os
 import sys
 from pathlib import Path
-
+st.write('hi friend')
 # Add the root directory to sys.path
 sys.path.append(str(Path(__file__).parent))
 from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
