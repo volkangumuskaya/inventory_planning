@@ -73,6 +73,7 @@ def show():
     with col1:
         if st.button("BUILD MODEL", type="primary"):
             try:
+                import pandas as pd
                 random.seed(42)
                 #Set of periods
                 
