@@ -1,25 +1,17 @@
 import streamlit as st
 
-# Define pages as separate functions
-def page_home():
+# Sidebar navigation with direct clickable options
+page = st.sidebar.radio("Navigation", ["Home", "About", "Contact"])
+
+# Show content based on the selected page
+if page == "Home":
     st.title("Home Page")
     st.write("Welcome to the home page!")
 
-def page_about():
+elif page == "About":
     st.title("About Page")
     st.write("This is the about page.")
 
-def page_contact():
+elif page == "Contact":
     st.title("Contact Page")
     st.write("Contact us here!")
-
-# Add navigation to the sidebar
-page = st.sidebar.selectbox("Navigation", ["Home", "About", "Contact"])
-
-# Show selected page content
-if page == "Home":
-    page_home()
-elif page == "About":
-    page_about()
-elif page == "Contact":
-    page_contact()
