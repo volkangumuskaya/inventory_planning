@@ -10,7 +10,7 @@ st.set_page_config(
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "",
-    ["Home", "About", "Contact",'test']
+    ["Home", "About"]
 )
 
 # import os
