@@ -7,9 +7,10 @@ from collections import defaultdict
 import pickle
 
 from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
-unit_delay_cost=10000
 
-def show():    
+
+def show():
+    unit_delay_cost=10000
     # Initialize session state for the button click
     if "show_solve_section" not in st.session_state:
         st.session_state.show_solve_section = False
@@ -22,12 +23,7 @@ def show():
     #     st.write('hello')
     #     # f.write("hello" + "\n")
     
-    # Set the title and favicon that appear in the Browser's tab bar.
-    st.set_page_config(
-        page_title='volkan-ai',
-        layout="wide",
-        # page_icon="images/weather_icon.png"
-    )
+    
     # Set the title that appears at the top of the page.
     st.image('images/el-chalten-min.jpg','El Chalten, Patagonia')
     st.header('A multi-horizon planning tool ', divider=True)
