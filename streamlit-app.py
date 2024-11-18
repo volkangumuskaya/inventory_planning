@@ -26,6 +26,6 @@ if page == "Home":
 elif page == "About":
     st.title("About Page")
     st.write("This is the about page.")
-elif page == "Contact":
-    test_page.show()
+# elif page == "Contact":
+#     test_page.show()
 
