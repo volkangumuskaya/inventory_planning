@@ -22,7 +22,7 @@ page = st.sidebar.radio(
 # Show content based on the selected page
 if page == "Home":
     test_page.show()
-    inititate_planning_tool.show()
+    # inititate_planning_tool.show()
 elif page == "About":
     st.title("About Page")
     st.write("This is the about page.")
