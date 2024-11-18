@@ -11,7 +11,7 @@ import os
 print("Main Current Working Directory:", os.getcwd())
 st.write('hi again')
 from subpages import inititate_planning_tool
-
+st.write('hi again2')
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title='volkan-ai',
