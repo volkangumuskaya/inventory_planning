@@ -8,7 +8,6 @@ from collections import defaultdict
 import pickle
 
 
-
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title='volkan-ai',
