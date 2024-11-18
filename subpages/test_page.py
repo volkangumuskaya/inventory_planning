@@ -179,3 +179,78 @@ def show():
             st.session_state.show_output_section = False
             st.session_state.problem=prob
 
+ #Download model
+    if st.session_state.show_build_section:
+        with col2:     
+            with open("nxp.lp", "rb") as file:
+                            btn = st.download_button(
+                                label="Download model",
+                                data=file,
+                                file_name="nxp.lp"
+                            )
+    
+    # Execute the new section logic if the button was pressed
+    if st.session_state.show_solve_section:
+        with col3:
+            if st.button("SOLVE MODEL", type="primary"):     
+                # The problem is solved using PuLP's choice of Solver
+                prob=st.session_state.problem
+                        
+                prob.solve()
+                # After task completes
+                st.success(f"Problem solved with status: {LpStatus[prob.status]}!")
+                
+                #extract info
+                import pandas as pd           
+                # Collect the variables and their values in a dictionary
+                all_variables = {v.name: v.varValue for v in prob.variables()}
+                
+                # Convert the dictionary to a pandas DataFrame
+                df = pd.DataFrame(list(all_variables.items()), columns=['var_name', 'var_value'])
+                
+                #Create VarTypes
+                # Define a dict for mapping prefixes to their respective VarType values
+                prefix_to_var_type = {
+                    'order_delay': 'Order_delay',
+                    'starting_inventory': 'starting_inventory',
+                    'order_fulfillment': 'order_fulfillment',
+                    'resource_production': 'resource_production'
+                }
+                
+                # Use a lambda function to apply the mapping based on the var_name prefix
+                df['VarType'] = df['var_name'].apply(lambda x: next((var_type for prefix, var_type in prefix_to_var_type.items() if x.startswith(prefix)), None))
+                st.session_state.df=df.copy()
+                st.session_state.summary_df=pd.DataFrame({'name':['Total_production_cost','Total_delays','n_vars','n_constraints'],
+                                        'value':[value(prob.objective)-df[(df.VarType=='Order_delay')].var_value.sum()*unit_delay_cost,
+                                                 df[(df.VarType=='Order_delay')].var_value.sum(),
+                                                 len(prob.variables()),
+                                                 len(prob.constraints)]
+                                        })
+                
+                st.session_state.show_output_section= True
+    
+    if st.session_state.show_solve_section:
+        st.header('Problem parameters', divider=True)
+        col1, col2,col3 = st.columns([1, 1, 1])   
+        with col1:
+            st.subheader('Time periods')
+            st.dataframe(st.session_state.time_df,hide_index=True)
+            st.subheader('Resources')
+            st.dataframe(st.session_state.resource_df,hide_index=True)
+        with col2:
+            st.subheader('Products')
+            st.dataframe(st.session_state.product_df,hide_index=True)
+        with col3:
+            st.subheader('Orders')
+            st.dataframe(st.session_state.order_df,hide_index=True)
+            
+    if st.session_state.show_output_section:      
+        st.header('Problem parameters', divider=True)
+        col1, col2 = st.columns([1, 1])
+        with col1:
+            st.subheader('Summary of solution')
+            st.dataframe(st.session_state.summary_df,hide_index=True)
+        with col2:
+            st.subheader('Variables')
+            st.dataframe(st.session_state.df,hide_index=True)
+
