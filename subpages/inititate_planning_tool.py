@@ -5,20 +5,15 @@ from pulp import LpProblem, LpMinimize, LpVariable, lpSum,LpInteger,LpContinuous
 import random
 from collections import defaultdict
 import pickle
-st.write('hi again sub1')
 import os
-st.write("Sub Current Working Directory:", os.getcwd())
 import sys
 from pathlib import Path
 
 # Add the root directory to sys.path
 sys.path.append(str(Path(__file__).parent))
-st.write('hi again sub2')
 from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
-st.write('hi again sub3')
 
 def show():
-    st.write('hi again from show 1')
     unit_delay_cost=10000
     # Initialize session state for the button click
     if "show_solve_section" not in st.session_state:
