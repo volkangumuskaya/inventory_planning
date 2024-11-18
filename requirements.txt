@@ -5,3 +5,4 @@ pulp
 requests
 dataclasses
 streamlit
+subpages
