@@ -42,5 +42,36 @@ def show():
     st.header('Problem parameters', divider=True)
     # Create three columns with custom widths
     col1, col2, col3 = st.columns([1, 1, 1])
+
+     with col1:
+            st.subheader("Number of time periods")
+            n_time_periods = st.selectbox('#Time periods',list(range(1,4)),index=1)
+            time_ids=list(range(n_time_periods))
+            st.subheader("Resources")
+            n_resources = st.selectbox('#Resources',list(range(1,4)),index=1)
+        
+        with col2:
+            st.subheader("Products")
+            n_products = st.selectbox('#Products',list(range(5,11)),index=4)
+            min_resource_needed, max_resource_needed = st.select_slider(
+                "Select min/max resources needed per product",
+                options=list(range(21)),
+                value=(0, 20),
+            )
+        with col3:
+            st.subheader("Orders")
+            n_orders = st.selectbox('#Orders',list(range(1,31)),index=29)
+            min_product_type, max_product_type = st.select_slider(
+                "Select min/max product type per order",
+                options=list(range(1,5)),
+                value=(2, 4),
+            )
+            min_product_amt, max_product_amt = st.select_slider(
+                "Select min/max #product per product type",
+                options=list(range(21)),
+                value=(10, 20),
+            )
     
-  
+        # Create three columns with custom widths
+        col1, col2, col3 = st.columns([1, 1, 1])
+      
