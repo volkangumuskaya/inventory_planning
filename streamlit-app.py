@@ -1,17 +1,4 @@
 import streamlit as st
-
-# Import the PuLP library
-import pandas as pd
-from pulp import LpProblem, LpMinimize, LpVariable, lpSum,LpInteger,LpContinuous,LpBinary,LpStatus,value
-import random
-from collections import defaultdict
-import pickle
-
-import os
-print("Main Current Working Directory:", os.getcwd())
-st.write('hi again')
-from subpages import inititate_planning_tool
-st.write('hi again2')
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title='volkan-ai',
@@ -24,6 +11,18 @@ page = st.sidebar.radio(
     "",
     ["Home", "About", "Contact"]
 )
+# Import the PuLP library
+import pandas as pd
+from pulp import LpProblem, LpMinimize, LpVariable, lpSum,LpInteger,LpContinuous,LpBinary,LpStatus,value
+import random
+from collections import defaultdict
+import pickle
+import os
+print("Main Current Working Directory:", os.getcwd())
+st.write('hi again')
+from subpages import inititate_planning_tool
+st.write('hi again2')
+
 
 
 # Show content based on the selected page
