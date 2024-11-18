@@ -27,5 +27,20 @@ def show():
         st.session_state.show_build_section = False
     if "show_output_section" not in st.session_state:
         st.session_state.show_output_section = False
+
+     # Set the title that appears at the top of the page.
+    st.image('images/el-chalten-min.jpg','El Chalten, Patagonia')
+    st.header('A multi-horizon planning tool ', divider=True)
+    '''
+    This is an example tool to create and solve an inventory planning problem with time periods. Enter problem parameters and press 'Build' to generate a model. Upon doing so, you may download the model as txt file and 'Solve'.
+    '''
+    # st.sidebar.header("About",divider='orange')
+    # with st.sidebar:
+    #     st.image('images/profile_round.png',width=200,caption="https://www.linkedin.com/in/volkangumuskaya/")
+        
+    #Show measurements only for selected station
+    st.header('Problem parameters', divider=True)
+    # Create three columns with custom widths
+    col1, col2, col3 = st.columns([1, 1, 1])
     
   
