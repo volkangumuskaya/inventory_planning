@@ -18,7 +18,7 @@ from data_class_script import Customer, Order, Product, Resource, generate_custo
 
 def show():
     # import pandas as pd
-    st.write("start here is version:",pd.__version__)
+    # st.write("start here is version:",pd.__version__)
     unit_delay_cost=10000
     # Initialize session state for the button click
     if "show_solve_section" not in st.session_state:
