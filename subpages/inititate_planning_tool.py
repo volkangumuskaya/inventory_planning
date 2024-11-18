@@ -14,6 +14,7 @@ sys.path.append(str(Path(__file__).parent))
 from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
 
 def show():
+    import pandas as pd
     st.write("here is version:",pd.__version__)
     unit_delay_cost=10000
     # Initialize session state for the button click
