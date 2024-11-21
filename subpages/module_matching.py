@@ -16,7 +16,7 @@ def show():
                'De-prioritize  order',
                'Change production capacity of a machine/resource '
               ]
-  nl = '\n'
+  nl = '  \n'
   module_names = f"{nl}{nl.join(tmp_names)}"
   
   # System prompt (not displayed to the user)
