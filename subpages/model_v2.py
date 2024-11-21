@@ -13,8 +13,8 @@ from pathlib import Path
 seed=random.randint(0,100)
 random.seed(50)
 
-sys.path.append(str(Path(__file__).parent))
-st.write('hi2')
+# sys.path.append(str(Path(__file__).parent))
+# st.write('hi2')
 # from data_class_script_v2 import (Customer, Order, Product, Resource,
 #                                   generate_customers, generate_orders, generate_products, generate_resources,
 #                                   determine_total_quantity_per_product,print_orders,retrieve_fulfill_times)
