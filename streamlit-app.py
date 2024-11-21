@@ -1,5 +1,7 @@
 import streamlit as st
-from subpages import inititate_planning_tool,module_matching,model_v2
+from subpages import inititate_planning_tool
+from subpages import module_matching
+from subpages import model_v2
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
     page_title='volkan-ai',
