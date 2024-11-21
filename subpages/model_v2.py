@@ -68,7 +68,7 @@ def show():
     max_criticality=10
 
    # Create three columns with custom widths
-    col1,col2 = st.columns([1,0.1])
+    col1,col2 = st.columns([1,0.001])
     with col1:
       if st.button("BUILD MODEL", type="primary"):
         try:
@@ -152,7 +152,13 @@ def show():
           
           # The problem data is written to an .lp file
           prob.writeLP("nxp_v2.lp")
-          
+          #Download model
+          with open("nxp_v2.lp", "rb") as file:
+                                  btn = st.download_button(
+                                      label="Download model",
+                                      data=file,
+                                      file_name="nxp_v2.lp"
+                                  ) 
           # The problem is solved using PuLP's choice of Solver
           prob.solve()
           
@@ -210,12 +216,5 @@ def show():
           st.session_state.show_build_section = True    
         except:
           st.write('hllo')
-    #Download model
-    if st.session_state.show_build_section:
-        with col2:     
-            with open("nxp_v2.lp", "rb") as file:
-                            btn = st.download_button(
-                                label="Download model",
-                                data=file,
-                                file_name="nxp_v2.lp"
-                            )
+       
+            
