@@ -75,7 +75,7 @@ def show():
   #     with st.chat_message("assistant", avatar="🤖"):
   #         st.markdown(f"""Hi, please explain what you want to do.""")
   #     st.session_state.welcome_message_shown = True
-  
+  st.session_state.welcome_message_shown = True
   
   if "selected_model" not in st.session_state:
       st.session_state.selected_model = None
