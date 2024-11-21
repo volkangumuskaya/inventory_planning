@@ -56,7 +56,7 @@ def show():
         n_order = st.select_slider(
             "Select number of orders",
             options=list([500,1000,1500,2000]),
-            value=(0, 20),
+            value=1000,
         )
         min_q_per_order, max_q_per_order = st.select_slider(
             "Select min/max resources needed per product",
