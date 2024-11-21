@@ -7,7 +7,7 @@ GROQ_API_KEY=st.secrets["GROQ_API_KEY"]
 #                    page_title="volkan-ai-chatbot")
 
 def show():
-  tmp_names = ['Initiate/create a plan',
+  module_name_list = ['Initiate/create a plan',
                'Modify the plan',
                'Get insights',
                'Download all results / production schedule',
@@ -17,7 +17,7 @@ def show():
                'Change production capacity of a machine/resource '
               ]
   nl = '  \n'
-  module_names = f"{nl}{nl.join(tmp_names)}"
+  module_names = f"{nl}{nl.join(module_name_list)}"
   
   # System prompt (not displayed to the user)
   SYSTEM_PROMPT = f'''You are a specific AI assistant that try to understand what user wants and will invoke a number of modules. 
@@ -27,7 +27,7 @@ def show():
   The module names are as follows: \n
   '''
 
-  module_selection = st.selectbox('Select a module from the list', module_names)
+  module_selection = st.selectbox('Select a module from the list', module_name_list)
   
   # def icon(emoji: str):
   #     """Shows an emoji as a Notion-style page icon."""
