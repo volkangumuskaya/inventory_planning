@@ -169,20 +169,20 @@ def show():
                             total_delayed_units+=o.product[o.product_id]*y[o.order_id][t].varValue
                         # print(f'order:{o.order_id},deadline:{o.deadline},product:{o.product_id},var:{y[o.order_id][t]},q:{o.product[o.product_id]},val:{y[o.order_id][t].varValue}')
             
-            print(f'Used seed:{seed}')
+            st.write(f'Used seed:{seed}')
             # n variables
-            print("# variables = ", len(prob.variables()))
+            st.write("# variables = ", len(prob.variables()))
             # The optimised objective function value is printed to the screen
-            print("# constraints = ", len(prob.constraints))
+            st.write("# constraints = ", len(prob.constraints))
             # The optimised objective function value is printed to the screen
-            print("Total Cost = ", value(prob.objective))
+            st.write("Total Cost = ", value(prob.objective))
             # number of delayed quantities
-            print("Total delayed product quantity:", total_delayed_units)
-            print("Total quantity:", total_quantity_all_products)
-            print(f'% delayed items: %{round(total_delayed_units/total_quantity_all_products*100,2)}')
+            st.write("Total delayed product quantity:", total_delayed_units)
+            st.write("Total quantity:", total_quantity_all_products)
+            st.write(f'% delayed items: %{round(total_delayed_units/total_quantity_all_products*100,2)}')
             # The status of the solution is printed to the screen
-            print("Status:", LpStatus[prob.status])
-            print("Time total:",end-start)
+            st.write("Status:", LpStatus[prob.status])
+            st.write("Time total:",end-start)
             
             #retrieve fulfillment times
             orders=retrieve_fulfill_times(orders_tmp=orders,y_vars=y,time_periods=time_ids)
@@ -204,6 +204,8 @@ def show():
             order_df['Delay_duration'] = np.where(order_df['Fulfilled_time']>order_df['Deadline'], order_df['Fulfilled_time']>order_df['Deadline'], 0)
 
             st.success(f"Total Cost = {value(prob.objective)}")
+            st.write("Total quantity:", total_quantity_all_products)
+          
                 
         except:
           st.write('hllo')
