@@ -68,7 +68,7 @@ def show():
     max_criticality=10
 
    # Create three columns with custom widths
-    col1 = st.columns([1])
+    col1,col2 = st.columns([1,0.1])
     with col1:
       if st.button("BUILD MODEL", type="primary"):
         try:
