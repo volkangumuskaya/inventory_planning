@@ -175,7 +175,7 @@ def show():
           # The optimised objective function value is printed to the screen
           st.write("Number of constraints = ", len(prob.constraints))
           # The optimised objective function value is printed to the screen
-          st.write("Total Cost = ", round(prob.objective,1)
+          st.write("Total Cost = ", round(prob.objective,1))
           # number of delayed quantities
           st.write(f"Total delayed product quantity: {total_delayed_units:.2f}")
           st.write(f"Total quantity: {total_quantity_all_products:.2f}")
