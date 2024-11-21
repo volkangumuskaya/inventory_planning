@@ -24,7 +24,7 @@ elif page == "About":
     st.title("About Page")
     st.write("This is the about page.")
 elif page == "Module_matching":
-    st.title("Module matching")
+    st.title("Module matching",divider=True)
     module_matching.show()
 # elif page == "Contact":
 #     test_page.show()
