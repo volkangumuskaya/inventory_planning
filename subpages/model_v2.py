@@ -72,7 +72,6 @@ def show():
     with col1:
       if st.button("BUILD MODEL", type="primary"):
         try:
-            random.seed(42)
             #Set of periods
             ##GENERATE MAIN COMPONENTS RANDOMLY
             time_ids=list(range(n_time_period))
