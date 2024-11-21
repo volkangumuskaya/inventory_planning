@@ -70,11 +70,11 @@ def show():
       st.session_state.welcome_message_shown = False
   
   
-  # Display the welcome message only once
-  if not st.session_state.welcome_message_shown:
-      with st.chat_message("assistant", avatar="🤖"):
-          st.markdown(f"""Hi, please explain what you want to do.""")
-      st.session_state.welcome_message_shown = True
+  # # Display the welcome message only once
+  # if not st.session_state.welcome_message_shown:
+  #     with st.chat_message("assistant", avatar="🤖"):
+  #         st.markdown(f"""Hi, please explain what you want to do.""")
+  #     st.session_state.welcome_message_shown = True
   
   
   if "selected_model" not in st.session_state:
