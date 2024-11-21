@@ -9,17 +9,19 @@ import pickle
 import os
 import sys
 from pathlib import Path
-
+st.write('hi0')
 seed=random.randint(0,100)
 random.seed(50)
-
+st.write('hi1')
 sys.path.append(str(Path(__file__).parent))
+st.write('hi2')
 from data_class_script_v2 import (Customer, Order, Product, Resource,
                                   generate_customers, generate_orders, generate_products, generate_resources,
                                   determine_total_quantity_per_product,print_orders,retrieve_fulfill_times)
+st.write('hi3')
 import time
 start=time.time()
-
+st.write('hi4')
 
 def show():
     # Initialize session state for the button click
