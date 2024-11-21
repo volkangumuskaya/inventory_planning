@@ -15,9 +15,9 @@ random.seed(50)
 
 sys.path.append(str(Path(__file__).parent))
 st.write('hi2')
-from data_class_script_v2 import (Customer, Order, Product, Resource,
-                                  generate_customers, generate_orders, generate_products, generate_resources,
-                                  determine_total_quantity_per_product,print_orders,retrieve_fulfill_times)
+# from data_class_script_v2 import (Customer, Order, Product, Resource,
+#                                   generate_customers, generate_orders, generate_products, generate_resources,
+#                                   determine_total_quantity_per_product,print_orders,retrieve_fulfill_times)
 # st.write('hi3')
 # import time
 # start=time.time()
