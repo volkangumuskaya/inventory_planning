@@ -13,7 +13,7 @@ def show():
                'Download all results / production schedule',
                'Prioritize an order',
                'Prioritize all orders of a customer',
-               'De-prioritize  order',
+               'List orders of a customer',
                'Change production capacity of a machine/resource '
               ]
   nl = '  \n'
@@ -25,6 +25,7 @@ def show():
   If you cannot find a reasonable match, ask the user to try again.
   You cannot respond with anything else. This is a strict requirement.
   The module names are as follows: \n
+  {module_names} 
   '''
 
   module_selection = st.selectbox('Select a module from the list', module_name_list)
@@ -66,8 +67,7 @@ def show():
   #     st.image('images/profile_round.png',width=200,caption="https://www.linkedin.com/in/volkangumuskaya/")
   
   # st.subheader("Chatbot", divider="rainbow", anchor=False)
-  st.write(f"""This is an application to match user text with predefined modules. You may select from the list or just write as free text. \n
-          {module_names}""")
+  st.write(f"""This is an application to match user text with predefined modules. You may select from the list or just write as free text. \n""")
   # st.caption("Credits to Tony Kipkemboi, `https://github.com/tonykipkemboi` ")
   
   client = Groq(
