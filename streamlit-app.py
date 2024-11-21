@@ -10,20 +10,20 @@ st.set_page_config(
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "",
-    ["Solve_model","Module_matching"]
+    ["Model v0",'Model v1',"Module matching"]
 )
 
 # import os
 # print("Main Current Working Directory:", os.getcwd())
 
 # Show content based on the selected page
-if page == "Solve_model":
+if page == "Model v0":
     # test_page.show()
     inititate_planning_tool.show()
-elif page == "About":
-    st.title("About Page")
+elif page == "Model v1":
+    st.header("Model v1",divider=True)
     st.write("This is the about page.")
-elif page == "Module_matching":
+elif page == "Module matching":
     st.header("Module matching",divider=True)
     module_matching.show()
 # elif page == "Contact":
