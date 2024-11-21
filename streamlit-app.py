@@ -10,7 +10,7 @@ st.set_page_config(
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "",
-    ["Home", "About","Module matching"]
+    ["Home", "About","Module_matching"]
 )
 
 # import os
@@ -23,7 +23,7 @@ if page == "Home":
 elif page == "About":
     st.title("About Page")
     st.write("This is the about page.")
-elif page == "Module matching":
+elif page == "Module_matching":
     st.title("Module matching")
     module_matching.show()
 # elif page == "Contact":
