@@ -9,10 +9,10 @@ import pickle
 import os
 import sys
 from pathlib import Path
-st.write('hi0')
+
 seed=random.randint(0,100)
 random.seed(50)
-st.write('hi1')
+
 sys.path.append(str(Path(__file__).parent))
 st.write('hi2')
 from data_class_script_v2 import (Customer, Order, Product, Resource,
