@@ -3,8 +3,8 @@ from typing import Generator
 from groq import Groq
 import requests
 GROQ_API_KEY=st.secrets["GROQ_API_KEY"]
-st.set_page_config(page_icon=":volcano:", layout="wide",
-                   page_title="volkan-ai-chatbot")
+# st.set_page_config(page_icon=":volcano:", layout="wide",
+#                    page_title="volkan-ai-chatbot")
 
 def show():
   tmp_names = ['Initiate/create a plan',
