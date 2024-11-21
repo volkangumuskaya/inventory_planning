@@ -1,6 +1,7 @@
 import streamlit as st
 from subpages import inititate_planning_tool
 from subpages import module_matching
+from subpages import test_page
 from subpages import model_v2
 # Set the title and favicon that appear in the Browser's tab bar.
 st.set_page_config(
