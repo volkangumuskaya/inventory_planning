@@ -169,7 +169,7 @@ def show():
                           total_delayed_units+=o.product[o.product_id]*y[o.order_id][t].varValue
                       # print(f'order:{o.order_id},deadline:{o.deadline},product:{o.product_id},var:{y[o.order_id][t]},q:{o.product[o.product_id]},val:{y[o.order_id][t].varValue}')
           
-          st.write("Used seed:,"seed")
+          st.write("Used seed:",seed)
           # n variables
           st.write("Number of variables = ", len(prob.variables()))
           # The optimised objective function value is printed to the screen
