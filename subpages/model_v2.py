@@ -171,14 +171,14 @@ def show():
             
             st.write(f'Used seed:{seed}')
             # n variables
-            st.write("# variables = ", len(prob.variables()))
+            st.write("variables = ", len(prob.variables()))
             # The optimised objective function value is printed to the screen
-            st.write("# constraints = ", len(prob.constraints))
+            st.write("constraints = ", len(prob.constraints))
             # The optimised objective function value is printed to the screen
-            st.write("Total Cost = ", value(prob.objective))
+            st.write(f"Total Cost = {value(prob.objective):.2f}")
             # number of delayed quantities
-            st.write("Total delayed product quantity:", total_delayed_units)
-            st.write("Total quantity:", total_quantity_all_products)
+            st.write(f"Total delayed product quantity: {total_delayed_units:.2f}")
+            st.write(f"Total quantity: {total_quantity_all_products:.2f}")
             st.write(f'% delayed items: %{round(total_delayed_units/total_quantity_all_products*100,2)}')
             # The status of the solution is printed to the screen
             st.write("Status:", LpStatus[prob.status])
@@ -205,7 +205,7 @@ def show():
 
             st.success(f"Total Cost = {value(prob.objective)}")
             st.write("Total quantity:", total_quantity_all_products)
-          
+            st.dataframe(order_df,hide_index=True)
                 
         except:
           st.write('hllo')
