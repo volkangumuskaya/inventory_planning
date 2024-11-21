@@ -169,20 +169,21 @@ def show():
                           total_delayed_units+=o.product[o.product_id]*y[o.order_id][t].varValue
                       # print(f'order:{o.order_id},deadline:{o.deadline},product:{o.product_id},var:{y[o.order_id][t]},q:{o.product[o.product_id]},val:{y[o.order_id][t].varValue}')
           
+
           st.write("Used seed:",seed)
           # n variables
           st.write("Number of variables = ", len(prob.variables()))
-          # The optimised objective function value is printed to the screen
+          # The optimised objective function value is st.writeed to the screen
           st.write("Number of constraints = ", len(prob.constraints))
-          # The optimised objective function value is printed to the screen
-          st.write("Total Cost = ", round(value(prob.objective,1)))
+          # The optimised objective function value is st.writeed to the screen
+          st.write("Total Cost = ", round(value(prob.objective),1))
           # number of delayed quantities
-          st.write("Total delayed product quantity = ", total_delayed_units)
+          st.write("Total delayed product quantity = ", round(total_delayed_units,2))
           st.write("Total quantity = ", total_quantity_all_products)
-          st.write(f'% delayed items: %{round(total_delayed_units/total_quantity_all_products*100,2)}')
-          # The status of the solution is printed to the screen
+          st.write("%Delayed items = %", round(total_delayed_units/total_quantity_all_products*100,2))
+          # The status of the solution is st.writeed to the screen
           st.write("Status:", LpStatus[prob.status])
-          st.write("Time total:",end-start)
+          st.write("Time total:",round(end-start,2))
           
           #retrieve fulfillment times
           orders=retrieve_fulfill_times(orders_tmp=orders,y_vars=y,time_periods=time_ids)
