@@ -102,7 +102,7 @@ def show():
             capacities=[round(total_quantity_all_products/len(time_ids)/len(resources),0)+1 for x in resources]
                            
             ########
-            MODELING
+            # MODELING
             
             #BUILD MODEL
             #Decision vars
