@@ -46,11 +46,11 @@ def show():
 
     with col1:
         st.subheader("Number of time periods")
-        n_time_period = st.selectbox('#Time periods',list(range(10,21)),index=1)
+        n_time_period = st.selectbox('#Time periods',list(range(10,21)),index=0)
         time_ids=list(range(n_time_period))
         st.subheader("Resources")
-        n_resource = st.selectbox('#Resources',list(range(2,3)),index=1)
-        n_customer = st.selectbox('#Customer',list(range(3,4)),index=1)
+        n_resource = st.selectbox('#Resources',list(range(2,3)),index=0)
+        n_customer = st.selectbox('#Customer',list(range(3,4)),index=0)
     with col2:
         st.subheader("Orders")
         n_order = st.select_slider(
