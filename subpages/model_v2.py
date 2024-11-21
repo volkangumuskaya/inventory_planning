@@ -157,7 +157,6 @@ def show():
           prob.solve()
           
           end=time.time()
-          # Each variable printed
           
           
           total_delayed_units=0
@@ -170,13 +169,13 @@ def show():
                           total_delayed_units+=o.product[o.product_id]*y[o.order_id][t].varValue
                       # print(f'order:{o.order_id},deadline:{o.deadline},product:{o.product_id},var:{y[o.order_id][t]},q:{o.product[o.product_id]},val:{y[o.order_id][t].varValue}')
           
-          st.write(f'Used seed:{seed}')
+          st.write("Used seed:,"seed")
           # n variables
-          st.write("variables = ", len(prob.variables()))
+          st.write("Number of variables = ", len(prob.variables()))
           # The optimised objective function value is printed to the screen
-          st.write("constraints = ", len(prob.constraints))
+          st.write("Number of constraints = ", len(prob.constraints))
           # The optimised objective function value is printed to the screen
-          st.write(f"Total Cost = {value(prob.objective):.2f}")
+          st.write("Total Cost = ", round(prob.objective,1)
           # number of delayed quantities
           st.write(f"Total delayed product quantity: {total_delayed_units:.2f}")
           st.write(f"Total quantity: {total_quantity_all_products:.2f}")
