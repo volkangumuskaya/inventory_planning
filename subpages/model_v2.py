@@ -207,5 +207,5 @@ def show():
 
      #                st.success(f"Total Cost = {value(prob.objective)}")
                     
-                except:
-                  print('oops')
+                # except:
+                #   print('oops')
