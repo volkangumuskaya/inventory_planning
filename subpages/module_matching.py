@@ -55,8 +55,9 @@ def show():
   # with st.sidebar:
   #     st.image('images/profile_round.png',width=200,caption="https://www.linkedin.com/in/volkangumuskaya/")
   
-  st.subheader("Chatbot", divider="rainbow", anchor=False)
-  st.write("This is a chatbot application to match user text with predefined modules")
+  # st.subheader("Chatbot", divider="rainbow", anchor=False)
+  st.write(f"""This is a chatbot application to match user text with predefined modules. Currently the main modules are: \n
+          {module_names}""")
   # st.caption("Credits to Tony Kipkemboi, `https://github.com/tonykipkemboi` ")
   
   client = Groq(
@@ -72,8 +73,7 @@ def show():
   # Display the welcome message only once
   if not st.session_state.welcome_message_shown:
       with st.chat_message("assistant", avatar="🤖"):
-          st.markdown(f"""Hi, please explain what you want to do. Currently the main modules are: \n
-          {module_names}""")
+          st.markdown(f"""Hi, please explain what you want to do.""")
       st.session_state.welcome_message_shown = True
   
   
