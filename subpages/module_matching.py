@@ -7,13 +7,22 @@ st.set_page_config(page_icon=":volcano:", layout="wide",
                    page_title="volkan-ai-chatbot")
 
 def show():
-  tmp_names = ['1. Initiate a plan', '2. Modify a plan', '3. Get insights', '4. Get results']
+  tmp_names = ['Initiate/create a plan',
+               'Modify the plan',
+               'Get insights',
+               'Download all results / production schedule',
+               'Prioritize an order',
+               'Prioritize all orders of a customer',
+               'De-prioritize  order',
+               'Change production capacity of a machine/resource '
+              ]
   nl = '\n'
   module_names = f"{nl}{nl.join(tmp_names)}"
   
   # System prompt (not displayed to the user)
   SYSTEM_PROMPT = f'''You are a specific AI assistant that try to understand what user wants and will invoke a number of modules. 
   If you find a reasonable match, I want you to respond in the format: The module match is: [Module name]. 
+  If you cannot find a reasonable match, ask the user to try again.
   You cannot respond with anything else. This is a strict requirement.
   The module names are as follows: \n
   {module_names}
