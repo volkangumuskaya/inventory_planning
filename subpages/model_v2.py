@@ -207,6 +207,15 @@ def show():
           st.success(f"Total Cost = {value(prob.objective)}")
           st.write("Total quantity:", total_quantity_all_products)
           st.dataframe(order_df,hide_index=True)
-              
+          st.session_state.show_build_section = True    
         except:
           st.write('hllo')
+    #Download model
+    if st.session_state.show_build_section:
+        with col2:     
+            with open("nxp_v2.lp", "rb") as file:
+                            btn = st.download_button(
+                                label="Download model",
+                                data=file,
+                                file_name="nxp_v2.lp"
+                            )
