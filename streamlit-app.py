@@ -22,7 +22,7 @@ if page == "Model v1":
     inititate_planning_tool.show()
 elif page == "Model v2":
     st.header("Model v2",divider=True)
-    st.write("This is the about page.")
+    model_v2.show()
 elif page == "Module matching":
     st.header("Module matching",divider=True)
     module_matching.show()
