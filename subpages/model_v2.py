@@ -10,8 +10,8 @@ import os
 import sys
 from pathlib import Path
 
-seed=random.randint(0,100)
-random.seed(50)
+seed=50
+random.seed(seed)
 
 sys.path.append(str(Path(__file__).parent))
 
