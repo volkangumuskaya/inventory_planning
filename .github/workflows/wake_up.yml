@@ -1,0 +1,16 @@
+name: Keep Streamlit App Alive
+
+on: workflow_dispatch
+  #schedule:
+    # Runs once a day at 00:00 UTC
+    #- cron: '0 12 * * *'
+
+jobs:
+  ping-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step to ping the Streamlit app URL
+      - name: Ping Streamlit App
+        run: |
+          curl -X GET "https://inventory-planning-volkan-ai.streamlit.app/" -o /dev/null -s -w "%{http_code}\n"
