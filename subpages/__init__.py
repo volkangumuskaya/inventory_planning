@@ -8,4 +8,4 @@ import pickle
 import os
 import sys
 from pathlib import Path
-st.write('hi from init:',pd.__version__)
+
