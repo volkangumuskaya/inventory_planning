@@ -1,9 +1,9 @@
 name: Keep Streamlit App Alive
 
-on: workflow_dispatch
-  #schedule:
+on: #workflow_dispatch
+  schedule:
     # Runs once a day at 00:00 UTC
-    #- cron: '0 12 * * *'
+    - cron: '0 12 * * *'
 
 jobs:
   ping-app:
