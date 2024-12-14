@@ -454,6 +454,8 @@ def show():
         # st.write(f'st.session_state.selected_order:{st.session_state.selected_order}')
 
         prioritize_orders()
+    else:
+    st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
 
 
 
