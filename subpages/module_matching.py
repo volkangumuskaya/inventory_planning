@@ -233,7 +233,7 @@ def prioritize_orders():
 
             prob_tmp = add_objective_terms_v2(
                 model=prob_tmp,
-                order_list=[st.session_state.orders[i] for i in selected_options if i != 0],
+                order_list=[st.session_state.orders[i] for i in selected_options],
                 # order_list=[st.session_state.orders[i] for i in range(0,300)],
                 multiplier=9, criticality=st.session_state.criticality,
                 y_f=y_tmp,
