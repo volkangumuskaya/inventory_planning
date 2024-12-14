@@ -444,7 +444,8 @@ def show():
 
             # # Call the function to extract and invoke the module based on the assistant's response
             st.session_state.selected_module=extract_module_from_response(full_response)
-
+            if st.session_state.selected_module not in ["Initiate/create a plan",'Prioritize orders']:
+              st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
     print(st.session_state.selected_module)
     if st.session_state.selected_module == "Initiate/create a plan":
         initiate_create_plan()
@@ -453,8 +454,8 @@ def show():
     elif st.session_state.selected_module == 'Prioritize orders':
         # st.write(f'st.session_state.selected_order:{st.session_state.selected_order}')
         prioritize_orders()
-    else:
-        st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
+  
+        
 
 
 
