@@ -168,9 +168,11 @@ def prioritize_orders():
 
     # Check if the user has selected an order
     # Check if the user has selected any orders
-    if len(selected_options) > 1 and selected_options[0] == placeholder_text:
-        # If the user selects the placeholder text, we treat it as no valid selection
+    if len(selected_options) == 0 or (len(selected_options) == 1 and selected_options[0] == placeholder_text):
         st.warning("Please select at least one order to prioritize.")
+        # return
+        # # If the user selects the placeholder text, we treat it as no valid selection
+        # st.warning("Please select at least one order to prioritize.")
     if st.button("Prioritize Selected Orders"):
         if selected_options != placeholder_text:
             st.session_state.counter+=1
