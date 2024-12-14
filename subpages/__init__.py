@@ -1,8 +1,5 @@
 import streamlit as st
-st.set_page_config(
-    page_title='volkan-ai',
-    layout="wide"
-)
+
 import random
 from subpages.data_class_script_v2 import (Customer, Order, Product, Resource,
                                   generate_customers, generate_orders, generate_products, generate_resources,
