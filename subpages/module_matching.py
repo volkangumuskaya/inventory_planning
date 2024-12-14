@@ -90,14 +90,14 @@ def initiate_create_plan():
         st.markdown(f"**Delayed orders:** {delayed_orders_tmp}")
         st.markdown(f"**Total # of delayed products :** {round(total_delayed_units_tmp, 0)}")
 
-def modify_plan():
-    # st.session_state.chatbot_active=False
-    st.write('Modify plan invoked successfully')
-    st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
-    # get_an_order()
-    # if st.session_state.selected_order is not None:
-    #     prioritize_an_order_v2(st.session_state.selected_order)
-    #     st.write('Modify plan ended successfully')
+# def modify_plan():
+#     # st.session_state.chatbot_active=False
+#     st.write('Modify plan invoked successfully')
+#     st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
+#     # get_an_order()
+#     # if st.session_state.selected_order is not None:
+#     #     prioritize_an_order_v2(st.session_state.selected_order)
+#     #     st.write('Modify plan ended successfully')
 
 
 def generate_chat_responses(chat_completion) -> Generator[str, None, None]:
@@ -299,7 +299,7 @@ module_name_list = ['Initiate/create a plan',
 # module matching
 module_name_mapping = {
     'Initiate/create a plan': initiate_create_plan,
-    'Modify the plan': modify_plan,
+    # 'Modify the plan': modify_plan,
     'Get insights': get_insights,
     'Download all results / production schedule': download_all_results_production_schedule,
     'Prioritize orders': prioritize_orders,
@@ -450,8 +450,8 @@ def show():
     print(st.session_state.selected_module)
     if st.session_state.selected_module == "Initiate/create a plan":
         initiate_create_plan()
-    elif st.session_state.selected_module == 'Modify the plan':
-        modify_plan()
+    # elif st.session_state.selected_module == 'Modify the plan':
+    #     modify_plan()
     elif st.session_state.selected_module == 'Prioritize orders':
         # st.write(f'st.session_state.selected_order:{st.session_state.selected_order}')
         prioritize_orders()
