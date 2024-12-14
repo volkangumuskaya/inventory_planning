@@ -93,7 +93,7 @@ def initiate_create_plan():
 def modify_plan():
     # st.session_state.chatbot_active=False
     st.write('Modify plan invoked successfully')
-
+    st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
     # get_an_order()
     # if st.session_state.selected_order is not None:
     #     prioritize_an_order_v2(st.session_state.selected_order)
@@ -281,10 +281,10 @@ def prioritize_orders():
 
 def list_orders_of_a_customer():
     st.write('list_orders_of_a_customer invoked successfully')
-
+    st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
 def change_production_capacity_of_a_machin_resource():
     st.write('change_production_capacity_of_a_machin_resource invoked successfully')
-
+    st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
 
 module_name_list = ['Initiate/create a plan',
                     'Modify the plan',
@@ -444,8 +444,7 @@ def show():
 
             # # Call the function to extract and invoke the module based on the assistant's response
             st.session_state.selected_module=extract_module_from_response(full_response)
-            if st.session_state.selected_module not in ["Initiate/create a plan",'Prioritize orders']:
-              st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
+              
     print(st.session_state.selected_module)
     if st.session_state.selected_module == "Initiate/create a plan":
         initiate_create_plan()
