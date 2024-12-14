@@ -385,7 +385,7 @@ def show():
     ###########################
     url = "https://api.groq.com/openai/v1/models"
     headers = {
-        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Authorization": f"Bearer {st.secrets["GROQ_API_KEY"]}",
         "Content-Type": "application/json"
         }
 
