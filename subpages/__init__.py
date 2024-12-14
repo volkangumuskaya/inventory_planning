@@ -1,4 +1,8 @@
 import streamlit as st
+st.set_page_config(
+    page_title='volkan-ai',
+    layout="wide"
+)
 import random
 from subpages.data_class_script_v2 import (Customer, Order, Product, Resource,
                                   generate_customers, generate_orders, generate_products, generate_resources,
@@ -21,10 +25,7 @@ max_criticality=10
 seed=50
 random.seed(seed)
 
-st.set_page_config(
-    page_title='volkan-ai',
-    layout="wide"
-)
+
 st.write('after page config')
 ##GENERATE MAIN COMPONENTS RANDOMLY
 time_ids, resources, products, customers, orders = create_main_objects(
