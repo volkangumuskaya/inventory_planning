@@ -1,10 +1,10 @@
 import streamlit as st
 from streamlit import divider
 
-# st.set_page_config(
-#     page_title='volkan-ai',
-#     layout="wide"
-# )
+st.set_page_config(
+    page_title='volkan-ai',
+    layout="wide"
+)
 
 from subpages import inititate_planning_tool
 from subpages import module_matching
