@@ -289,7 +289,7 @@ def change_production_capacity_of_a_machin_resource():
     st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
 
 module_name_list = ['Initiate/create a plan',
-                    'Modify the plan',
+                    # 'Modify the plan',
                     'Get insights',
                     'Download all results / production schedule',
                     'Prioritize orders',
