@@ -448,11 +448,10 @@ def show():
     print(st.session_state.selected_module)
     if st.session_state.selected_module == "Initiate/create a plan":
         initiate_create_plan()
-    if st.session_state.selected_module == 'Modify the plan':
+    elif st.session_state.selected_module == 'Modify the plan':
         modify_plan()
-    if st.session_state.selected_module == 'Prioritize orders':
+    elif st.session_state.selected_module == 'Prioritize orders':
         # st.write(f'st.session_state.selected_order:{st.session_state.selected_order}')
-
         prioritize_orders()
     else:
         st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
