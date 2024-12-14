@@ -11,7 +11,7 @@ from subpages.data_class_script_v2 import (Customer, Order, Product, Resource,
                                   generate_customers, generate_orders, generate_products, generate_resources,
                                   determine_total_quantity_per_product,print_orders,retrieve_fulfill_times)
 from subpages.model_functions import print_product_production,st_print_product_production
-GROQ_API_KEY = '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'
+
 from subpages.model_functions import print_product_production,st_print_product_production
 from subpages.model_functions import create_main_objects,create_obj_function,create_model
 import time
