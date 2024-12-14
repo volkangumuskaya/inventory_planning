@@ -455,7 +455,7 @@ def show():
 
         prioritize_orders()
     else:
-    st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
+        st.session_state.messages.append({"role": "assistant", "content": "Invalid or in-progress module."})
 
 
 
