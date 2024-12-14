@@ -21,7 +21,7 @@ from subpages.prioritize_order import check_delayed_orders
 from subpages.model_functions import create_main_objects,create_obj_function,create_model
 from subpages.prioritize_order import add_objective_terms_v2
 
-st.write('before params')
+# st.write('before params')
 #Set of periods
 n_time_period=20
 n_resource=2
@@ -35,7 +35,7 @@ seed=50
 random.seed(seed)
 
 
-st.write('after page config')
+# st.write('after page config')
 ##GENERATE MAIN COMPONENTS RANDOMLY
 time_ids, resources, products, customers, orders = create_main_objects(
     n_period=n_time_period, n_resource=n_resource, n_customer=n_customer, n_order=n_order,
@@ -47,7 +47,7 @@ prob_tmp, x_tmp, y_tmp, inv_tmp = create_model(
     resources=resources, products=products, customers=customers, orders=orders,
     time_ids=time_ids, min_criticality=min_criticality, max_criticality=max_criticality, seed=seed)
 prob.solve()
-st.write('after solve')
+# st.write('after solve')
 orders = retrieve_fulfill_times(
         orders_tmp=orders,
         y_vars=y,
