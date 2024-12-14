@@ -23,7 +23,7 @@ from subpages.prioritize_order import add_objective_terms_v2
 
 # Set the title and favicon that appear in the Browser's tab bar.
 module_name_list = ['Initiate/create a plan',
-                    'Modify the plan',
+                    # 'Modify the plan',
                     'Get insights',
                     'Download all results / production schedule',
                     'Prioritize orders',
