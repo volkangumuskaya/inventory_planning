@@ -5,7 +5,7 @@ import random
 from collections import defaultdict
 random.seed(42)
 
-from data_class_script import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
+from subpages.data_class_script_v2  import Customer, Order, Product, Resource, generate_customers, generate_orders, generate_products, generate_resources
 
 #Set of periods
 time_ids=[0,1,2]

@@ -30,7 +30,9 @@ def show():
         st.session_state.show_build_section = False
     if "show_output_section" not in st.session_state:
         st.session_state.show_output_section = False
-    
+    if "current_model" not in st.session_state:
+        st.session_state.current_model = LpProblem("current_model", LpMinimize)
+
     
     # Set the title that appears at the top of the page.
     st.image('images/el-chalten-min.jpg','El Chalten, Patagonia')
@@ -152,6 +154,12 @@ def show():
           
           # The problem data is written to an .lp file
           prob.writeLP("nxp_v2.lp")
+
+          st.session_state.current_model = prob
+          st.write("st.session_state.current_model initialized")
+
+
+
           #Download model
           with open("nxp_v2.lp", "rb") as file:
                                   btn = st.download_button(
