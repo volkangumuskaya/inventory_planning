@@ -21,7 +21,7 @@ from subpages.prioritize_order import check_delayed_orders
 from subpages.model_functions import create_main_objects,create_obj_function,create_model
 from subpages.prioritize_order import add_objective_terms_v2
 
-
+st.write('before params')
 #Set of periods
 n_time_period=20
 n_resource=2
