@@ -9,6 +9,10 @@
 #   module_matching                     : Builds module_matching page
 
 import streamlit as st
+st.set_page_config(
+    page_title='volkan-ai',
+    layout="wide"
+)
 from subpages import module_matching # Corresponds to the page where we have modules, e.g. initalize, priortize orders, etc
 from subpages import default_model # Corresponds to creating and solving a math model with customized parameters
 
