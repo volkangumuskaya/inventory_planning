@@ -1,41 +1,13 @@
 # Import the PuLP library
 import streamlit as st
-import pandas as pd
-from pulp import LpProblem, LpMinimize, LpVariable, lpSum,LpInteger,LpContinuous,LpBinary,LpStatus,value
-import random
-import numpy as np
-from collections import defaultdict
-import pickle
-import os
-import sys
-from pathlib import Path
+from pulp import LpProblem, LpMinimize, LpStatus,value
 import time
-from subpages.prioritize_order import check_delayed_orders,add_objective_terms_v2
 
 
-sys.path.append(str(Path(__file__).parent))
-from subpages.model_functions import print_product_production,st_print_product_production
-from subpages.model_functions import create_main_objects,create_obj_function,create_model
-from subpages.data_class_script_v2 import (Customer, Order, Product, Resource,
-                                  generate_customers, generate_orders, generate_products, generate_resources,
-                                  determine_total_quantity_per_product,print_orders,retrieve_fulfill_times)
+from subpages.model_functions import create_model,check_delayed_orders
+from subpages.classes_and_generating_functions import (determine_total_quantity_per_product,
+                                                       retrieve_fulfill_times, create_main_objects)
 
-# def check_delayed_orders(f_orders: list[Order], f_y: LpVariable, f_time_ids: list[int]):
-#     # Each variable printed
-#     total_delayed_units = 0
-#     delayed_orders = []
-#     for o in f_orders:
-#         for t in f_time_ids:
-#             check_sum = 0
-#             if (f_y[o.order_id][t].varValue > 0.001) and (check_sum <= 1.00):
-#                 check_sum += o.deadline
-#                 if t > o.deadline:
-#                     total_delayed_units += o.product[o.product_id] * f_y[o.order_id][t].varValue
-#                     print(
-#                         f'order:{o.order_id},deadline:{o.deadline},product:{o.product_id},'
-#                         f'var:{f_y[o.order_id][t]},q:{o.product[o.product_id]},val:{f_y[o.order_id][t].varValue}')
-#                     delayed_orders.append(o.order_id)
-#     return set(delayed_orders), total_delayed_units
 
 def show():
     # Initialize session state for the button click
@@ -50,8 +22,7 @@ def show():
     if "tmp_model" not in st.session_state:
         st.session_state.tmp_model = LpProblem("tmp_model", LpMinimize)
 
-    # Set the title that appears at the top of the page.
-    # st.image('images/el-chalten-min.jpg', 'El Chalten, Patagonia')
+    # Set the title and explanation that appears at the top of the page.
     st.header('A multi-horizon planning tool v2', divider=True)
     st.markdown(
     '''
@@ -63,7 +34,7 @@ def show():
     '''
         )
 
-    # Show measurements only for selected station
+    # Create the widgets that control the problem parameters
     st.header('Problem parameters', divider=True)
     # Create three columns with custom widths
     col1, col2 = st.columns([1, 1])
@@ -71,8 +42,6 @@ def show():
     with col1:
         st.subheader("Number of time periods")
         n_time_period = st.selectbox('#Time periods', list(range(10, 21)), index=10)
-        # st.write(f'n_time_period:{n_time_period}')
-        time_ids = list(range(n_time_period))
         st.subheader("Resources")
         n_resource = st.selectbox('#Resources', list(range(2, 3)), index=0)
         n_customer = st.selectbox('#Customer', list(range(3, 4)), index=0)
@@ -113,21 +82,9 @@ def show():
             total_quantity_per_product = determine_total_quantity_per_product(orders_f=orders, products_f=products)
             total_quantity_all_products = sum(total_quantity_per_product.values())
 
-            # Decision variables and indices
-            resource_ids = [x.resource_id for x in resources]
-            product_ids = [x.product_id for x in products]
-            order_ids = [x.order_id for x in orders]
-            resource_names = [x.name for x in resources]
-            product_names = [x.name for x in products]
-            order_names = [f'order_{x.order_id}' for x in orders]
-            random.seed(seed)
-            criticality = [random.randint(a=min_criticality, b=max_criticality) / max_criticality for x in orders]
-
-            #Save to session state
+            #Save to session state. A dict could be used
             st.session_state.current_model = prob
-            # st.write("st.session_state.current_model initialized")
             st.session_state.tmp_model = prob_tmp
-            # st.write("st.session_state.tmp_model initialized")
             st.session_state.resources=resources
             st.session_state.products=products
             st.session_state.orders=orders
@@ -137,49 +94,17 @@ def show():
             st.session_state.min_quantity=min_q_per_order
             st.session_state.max_quantity=max_q_per_order
 
-            # # Download model
-            # with open("../nxp_v3.lp", "rb") as file:
-            #     btn = st.download_button(
-            #         label="Download model",
-            #         data=file,
-            #         file_name="../nxp_v3.lp"
-            #         )
-
             # The problem is solved using PuLP's choice of Solver
             prob.solve()
-            prob.writeLP("original.lp")
             orders = retrieve_fulfill_times(orders_tmp=orders, y_vars=y, time_periods=time_ids)
             delayed_orders, total_delayed_units = check_delayed_orders(f_orders=orders, f_y=y, f_time_ids=time_ids)
             st.session_state.current_model = prob
             st.session_state.orders = orders
             st.session_state.delayed_orders = delayed_orders
 
-            # print_product_production(
-            #     f_product_ids=product_ids, f_resource_ids=resource_ids, f_x=x, f_time_ids=time_ids)
-
-            # st_print_product_production(
-            #     f_product_ids=product_ids, f_resource_ids=resource_ids, f_x=x, f_time_ids=time_ids)
             end = time.time()
 
-            # st.write("Used seed:", seed)
-            # st.markdown(f"Used seed:{seed}")
-            # # n variables
-            # st.write("Number of variables = ", len(prob.variables()))
-            # # The optimised objective function value is st.writeed to the screen
-            # st.write("Number of constraints = ", len(prob.constraints))
-            # # The optimised objective function value is st.writeed to the screen
-            # st.write("Total Cost = ", round(value(prob.objective), 1))
-            # # number of delayed quantities
-            # st.write("Total delayed product quantity = ", round(total_delayed_units, 2))
-            # st.write(f"Delayed orders = {delayed_orders}")
-            # st.write("Total quantity = ", total_quantity_all_products)
-            # st.write("%Delayed items = %", round(total_delayed_units / total_quantity_all_products * 100, 2))
-            # # The status of the solution is st.writeed to the screen
-            # st.write("Status:", LpStatus[prob.status])
-            # st.write("Time total:", round(end - start, 2))
-
             avatar = '🤖'
-
             with st.chat_message("assistant", avatar=avatar):
                 st.markdown(f"**Delayed orders:** {delayed_orders}")
                 st.markdown(f"**Total # of delayed products :** {round(total_delayed_units, 0)}")
@@ -190,24 +115,5 @@ def show():
                 st.markdown(f"**Number of constraints:** {len(prob.constraints)}")
                 st.markdown(f"**Status:** {LpStatus[prob.status]}")
                 st.markdown(f"**Time total:** {round(end - start, 2)} seconds")
-
-            # st.write("STARTING MODIFY")
-            # prob_tmp = add_objective_terms_v2(
-            #     model=prob_tmp, order_list=orders[0:900], multiplier=10, criticality=criticality, y_f=y_tmp,
-            #     time_ids_f=time_ids)
-            # st.write("solving")
-            # prob_tmp.solve()
-            # st.write("retriving orders")
-            # orders_tmp = retrieve_fulfill_times(orders_tmp=orders, y_vars=y_tmp, time_periods=time_ids)
-            # delayed_orders_tmp, total_delayed_units_tmp = check_delayed_orders(
-            #     f_orders=orders_tmp, f_y=y_tmp, f_time_ids=time_ids)
-            # st_print_product_production(
-            #     f_product_ids=product_ids, f_resource_ids=resource_ids, f_x=x_tmp, f_time_ids=time_ids)
-            # st.write("Total Cost = ", round(value(prob_tmp.objective), 1))
-            # # number of delayed quantities
-            # st.write("Total delayed product quantity = ", round(total_delayed_units_tmp, 2))
-            # st.write("Delayed orders = ", delayed_orders_tmp)
-        # except:
-        #         st.write('Error')
 
 

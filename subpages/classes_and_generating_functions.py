@@ -1,5 +1,18 @@
+
+"""
+This script involves the following:
+1) Class structures of Resources, Products, Orders, Customers
+
+2) Helper functions to reduce repetition such as generate_orders, generate_products, etc.
+Note that some are specific to our case, e.g. we have only three Product types, and they are built using;
+either Resource 0, Resource 1 or either.
+
+3) A few helper function to update these objects when new solution is generated.
+Why step 3? because when we solve math model the objects are not automatically updated.
+"""
+#Below are the libraries
 from dataclasses import dataclass, field
-from typing import Dict, Optional
+from typing import Dict
 from collections import defaultdict
 import random
 
@@ -36,16 +49,6 @@ class Order:
         """Initialize 'product' dict based on '_product'."""
         # Create a product_id-based dict from the _product dict
         self.product = defaultdict(int, {product.product_id: amount for product, amount in self._product.items()})
-    #
-    # @property
-    # def total_resource_usage(self) -> Dict[Resource, int]:
-    #     """Calculate total resource usage across all products in the order."""
-    #     total_usage = defaultdict(int)
-    #     for product, amount in self._product.items():
-    #         for resource_id, usage_per_product in product.resource_usage.items():
-    #             total_usage[resource_id] += usage_per_product * amount
-    #     return total_usage
-
 
 @dataclass(frozen=True)
 class Customer:
@@ -62,21 +65,7 @@ def generate_resources(n_resources,resource_capacity=100):
 def generate_customers(n_customers):
     customers=[Customer(name=f"customer{i}",customer_id=i) for i in range(n_customers)]
     return customers
-#
-# def generate_products(n_products,resources,min_resource_needed=0,max_resource_needed=20):
-#     products=[]
-#     for i in range(n_products):
-#         # Randomly assign some resources to the product
-#         random_resources = random.sample(resources, random.randint(a=1, b=len(resources)))
-#         random_resources_dict = {resource.resource_id: random.randint(min_resource_needed, max_resource_needed) for resource in random_resources}
-#
-#         products.append(
-#             Product(name=f"product_{i}",
-#                     product_id=i,
-#                     resource_usage=defaultdict(int, random_resources_dict)
-#                     )
-#             )
-#     return products
+
 
 def generate_products():
     products=[]
@@ -111,7 +100,14 @@ def determine_total_quantity_per_product(orders_f,products_f):
                 total_quantity_per_product[p.product_id] += o.product[p.product_id]
     return dict(total_quantity_per_product)
 
+
 def retrieve_fulfill_times(orders_tmp:list[Order],y_vars:list,time_periods:list[int]):
+    """
+    Updating orders objects based on the solution. Below are the specific attributes assigned
+    fulfilled : the time an order is completely fulfilled
+    delay_status: 'on_time' or 'delayed'
+    delay_duration: number of time periods delayed
+    """
     for o in orders_tmp:
         o.delay_status='on_time'
         for t in sorted(time_periods, reverse=True):
@@ -123,9 +119,26 @@ def retrieve_fulfill_times(orders_tmp:list[Order],y_vars:list,time_periods:list[
                 break  # Move to the next 'o' immediately after satisfying the condition
     return orders_tmp
 
+
 def print_orders(orders):
     for o in orders:
         print(f'id:{o.order_id}, t:{o.deadline}, '
               f'{o.customer_name}, '
               f'product(id-qty):({o.product_id}-{o.product[o.product_id]})'
               )
+
+
+def create_main_objects(n_period: int, n_resource: int, n_customer:int, n_order:int,
+                        min_q_per_order:int, max_q_per_order:int, seed:int):
+    random.seed(seed)
+    ##GENERATE MAIN COMPONENTS RANDOMLY
+    f_time_ids = list(range(n_period))
+    f_resources = generate_resources(n_resources=n_resource)  # generate resource types
+    f_products = generate_products()  # using the special structure where
+    f_customers = generate_customers(n_customers=n_customer)
+
+    f_orders = generate_orders(
+        n_orders=n_order, products=f_products, customers=f_customers, time_periods=f_time_ids, min_product_type=1,
+        max_product_type=1,
+        min_product_amt=min_q_per_order, max_product_amt=max_q_per_order)
+    return f_time_ids, f_resources, f_products, f_customers, f_orders

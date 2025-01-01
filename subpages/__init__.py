@@ -1,14 +1,21 @@
+# This script is run under the hood to initiate the session states.
+# Observe that in subpages.module_matching, we use st.session_state vars without initializing them.
+# If we run default_model page, there we do initialize. However, even if we activate module_matching straight away
+# these vars are already initialized, for example st.session_state.min_criticality.
+# This is achieved via this __init__.py
+# It is also where we format the streamlit page via st.set_page_config (st.set_page_config should always be the first
+# streamlit command ti be run. If we added a st.write('hello') before st.set_page_config, we would get errror).
+# If interested, some st.write's can be thrown in various points to check the order of execution.
 import streamlit as st
 
 import random
-from subpages.data_class_script_v2 import (Customer, Order, Product, Resource,
-                                  generate_customers, generate_orders, generate_products, generate_resources,
-                                  determine_total_quantity_per_product,print_orders,retrieve_fulfill_times)
-from subpages.model_functions import print_product_production
-from subpages.prioritize_order import check_delayed_orders
-from subpages.model_functions import create_main_objects,create_obj_function,create_model
-from subpages.prioritize_order import add_objective_terms_v2
-
+from subpages.classes_and_generating_functions import (Customer, Order, Product, Resource,
+                                                       generate_customers, generate_orders, generate_products,
+                                                       generate_resources,
+                                                       determine_total_quantity_per_product, print_orders,
+                                                       retrieve_fulfill_times, create_main_objects)
+from subpages.model_functions import print_product_production, add_objective_terms_v2, check_delayed_orders
+from subpages.model_functions import create_obj_function,create_model
 
 #Set of periods
 n_time_period=20
@@ -60,7 +67,6 @@ criticality = [random.randint(a=min_criticality, b=max_criticality) / max_critic
 st.session_state.current_model = prob
 st.session_state.orders = orders
 st.session_state.delayed_orders = delayed_orders
-# st.write('init entered')
 st.session_state.total_delayed_units = total_delayed_units
 st.session_state.resources = resources
 st.session_state.products = products
@@ -70,13 +76,9 @@ st.session_state.resource_ids = resource_ids
 st.session_state.seed=seed
 st.session_state.min_criticality=min_criticality
 st.session_state.max_criticality=max_criticality
-
 st.session_state.customers = customers
 st.session_state.time_ids = time_ids
 st.session_state.x = x
 st.session_state.y = y
 st.session_state.criticality = criticality
-
-# st.write("st.session_state.current_model initialized")
 st.session_state.tmp_model = prob_tmp
-# st.write("st.session_state.tmp_model initialized")
