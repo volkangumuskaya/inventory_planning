@@ -2,7 +2,11 @@
 import streamlit as st
 from pulp import LpProblem, LpMinimize, LpStatus,value
 import time
+import sys
+from pathlib import Path
 
+# Add the root directory of the repo to sys.path
+sys.path.append(str(Path(__file__).parent))
 st.write('checkpoint1 default.py')
 from subpages.model_functions import create_model,check_delayed_orders
 st.write('checkpoint2 default.py')
