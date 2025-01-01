@@ -23,7 +23,7 @@ def show():
         st.session_state.tmp_model = LpProblem("tmp_model", LpMinimize)
 
     # Set the title and explanation that appears at the top of the page.
-    st.header('A multi-horizon planning tool v2', divider=True)
+    st.header('A multi-horizon planning tool v2 refactored', divider=True)
     st.markdown(
     '''
     This is the second model to create and solve an inventory planning problem with time periods. 
