@@ -33,10 +33,10 @@ max_criticality=10
 seed=50
 random.seed(seed)
 
-st.set_page_config(
-    page_title='volkan-ai',
-    layout="wide"
-)
+# st.set_page_config(
+#     page_title='volkan-ai',
+#     layout="wide"
+# )
 # st.write('init started')
 ##GENERATE MAIN COMPONENTS RANDOMLY
 time_ids, resources, products, customers, orders = create_main_objects(
