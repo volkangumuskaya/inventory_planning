@@ -32,7 +32,7 @@ st.set_page_config(
     page_title='volkan-ai',
     layout="wide"
 )
-st.write('init started')
+# st.write('init started')
 ##GENERATE MAIN COMPONENTS RANDOMLY
 time_ids, resources, products, customers, orders = create_main_objects(
     n_period=n_time_period, n_resource=n_resource, n_customer=n_customer, n_order=n_order,
