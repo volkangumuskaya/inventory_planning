@@ -3,12 +3,13 @@ import streamlit as st
 from pulp import LpProblem, LpMinimize, LpStatus,value
 import time
 
-
+st.write('checkpoint1 default.py')
 from subpages.model_functions import create_model,check_delayed_orders
+st.write('checkpoint2 default.py')
 from subpages.classes_and_generating_functions import (determine_total_quantity_per_product,
                                                        retrieve_fulfill_times, create_main_objects)
 
-
+st.write('checkpoint3 default.py')
 def show():
     # Initialize session state for the button click
     if "show_solve_section" not in st.session_state:
