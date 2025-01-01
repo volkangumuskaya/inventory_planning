@@ -36,7 +36,7 @@ max_criticality=10
 seed=50
 random.seed(seed)
 
-def run(): 
+def initial_run(): 
   ##GENERATE MAIN COMPONENTS RANDOMLY
   time_ids, resources, products, customers, orders = create_main_objects(
       n_period=n_time_period, n_resource=n_resource, n_customer=n_customer, n_order=n_order,
