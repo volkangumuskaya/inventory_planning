@@ -5,7 +5,6 @@ import streamlit as st
 from subpages.classes_and_generating_functions import (Customer, Order, Product, Resource,
                                                        determine_total_quantity_per_product)
 from pulp import LpProblem, LpMinimize, LpVariable, lpSum, LpContinuous
-st.write('checkpoint1 model_functions.py')
 
 def create_obj_function(problem: LpProblem, y: LpVariable, criticality: list[float], orders: list[Order],
                         time_ids: list[int]):
