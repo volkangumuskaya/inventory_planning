@@ -1,28 +1,10 @@
-from pulp import LpProblem
+#This script includes the helper functions related to building or modifying math model
 import random
 import streamlit as st
-from subpages.data_class_script_v2 import (Customer, Order, Product, Resource,
-                                  generate_customers, generate_orders, generate_products, generate_resources,
-                                  determine_total_quantity_per_product,print_orders,retrieve_fulfill_times)
-from pulp import LpProblem, LpMinimize, LpVariable, lpSum,LpInteger,LpContinuous,LpBinary,LpStatus,value
 
-def create_main_objects(n_period: int, n_resource: int, n_customer:int, n_order:int,
-                        min_q_per_order:int, max_q_per_order:int, seed:int):
-    random.seed(seed)
-    ##GENERATE MAIN COMPONENTS RANDOMLY
-    f_time_ids = list(range(n_period))
-    f_resources = generate_resources(n_resources=n_resource)  # generate resource types
-    f_products = generate_products()  # using the special structure where
-    # product0 -> resource0,
-    # product1 -> resource1,
-    # product2 -> resource 0 or 1
-    f_customers = generate_customers(n_customers=n_customer)
-
-    f_orders = generate_orders(
-        n_orders=n_order, products=f_products, customers=f_customers, time_periods=f_time_ids, min_product_type=1,
-        max_product_type=1,
-        min_product_amt=min_q_per_order, max_product_amt=max_q_per_order)
-    return f_time_ids,f_resources,f_products,f_customers,f_orders
+from subpages.classes_and_generating_functions import (Customer, Order, Product, Resource,
+                                                       determine_total_quantity_per_product)
+from pulp import LpProblem, LpMinimize, LpVariable, lpSum, LpContinuous
 
 
 def create_obj_function(problem: LpProblem, y: LpVariable, criticality: list[float], orders: list[Order],
@@ -109,3 +91,41 @@ def create_model(resources: list[Resource] , products : list[Product], customers
                 f"Inventory_balance_product{p}_time{t}",
                 )
     return prob,x,y,inv
+
+
+def add_objective_terms_v2(model: LpProblem, order_list: list[Order],y_f:list,
+                           multiplier: float, criticality:list[float], time_ids_f:list[int]):
+    """
+        Add new terms to the objective function to prioritize the selected orders (order_list)
+    """
+    new_term = [
+        multiplier * (t - o.deadline) ** 2 * criticality[o.order_id] * y_f[o.order_id][t] * o.product[o.product_id]
+        for o in order_list for t in time_ids_f if t > o.deadline]
+    model_copy = model.copy()
+
+    model_copy.setObjective(lpSum(model_copy.objective + new_term))
+    return model_copy
+
+
+def check_delayed_orders(f_orders:list[Order], f_y:LpVariable, f_time_ids: list[int]):
+    """
+    Create set of delayed orders that will be displayed for user reference
+    """
+
+    # Each variable printed
+    total_delayed_units=0
+    delayed_orders=[]
+    for o in f_orders:
+        for t in f_time_ids:
+            check_sum=0
+            if (f_y[o.order_id][t].varValue>0.0001) and (check_sum<=1.00):
+                check_sum+=f_y[o.order_id][t].varValue
+                if t>o.deadline:
+                    total_delayed_units+=o.product[o.product_id]*f_y[o.order_id][t].varValue
+                    print(f'order:{o.order_id},deadline:{o.deadline},'
+                          f'product:{o.product_id},var:{f_y[o.order_id][t]},'
+                          f'delay_q:{o.product[o.product_id]*f_y[o.order_id][t].varValue}, sum:{check_sum},'
+                          f'q:{o.product[o.product_id]},val:{o.product[o.product_id]*f_y[o.order_id][t].varValue},'
+                          f'total_delay:{total_delayed_units}')
+                    delayed_orders.append(o.order_id)
+    return sorted(set(delayed_orders)), total_delayed_units

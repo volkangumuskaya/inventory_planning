@@ -1,62 +1,46 @@
+# This is the main script executed and served by streamlit servers.
+# This app involves the following subscripts located in subpages folder.
+# Detailed explanations are provided in the corresponding scripts. For reference to understand general structure:
+#   streamlit-app.py                    : Main script executed to build the front end (i.e. streamlit page)
+#   _init__.py                          : Executed under the ood to initialize session states
+#   classes_and_generating_functions.py : Includes class structures and helper functions to generate the objects
+#   default_model.py                    : Builds the default_model page where user can modify model parameters and solve
+#   model_functions.py                  : Includes the helper functions related to building/modifying PuLp math model
+#   module_matching                     : Builds module_matching page
+
 import streamlit as st
-from streamlit import divider
+from subpages import module_matching # Corresponds to the page where we have modules, e.g. initalize, priortize orders, etc
+from subpages import default_model # Corresponds to creating and solving a math model with customized parameters
 
-# st.set_page_config(
-#     page_title='volkan-ai',
-#     layout="wide"
-# )
-
-from subpages import inititate_planning_tool
-from subpages import module_matching
-from subpages import model_v2
-from subpages import default_model
-import test
-# Set the title and favicon that appear in the Browser's tab bar.
+# Create sidebar
+st.sidebar.header("**NAVIGATION**",divider=True) #This is the header. Note that **[text]** imposes bold format
+# The list of modules to be displayed for reference only
 module_name_list = ['Initiate/create a plan',
                     'Modify the plan',
                     'Get insights',
                     'Download all results / production schedule',
                     'Prioritize orders',
-                    # 'Prioritize all orders of a customer',
                     'List orders of a customer',
                     'Change production capacity of a machine/resource '
                     ]
-
-# Sidebar navigation
-# st.sidebar.title("Navigation",divider=True)
-st.sidebar.header("**NAVIGATION**",divider=True)
-
+# Radio button to switch between the pages.
 page = st.sidebar.radio(
-    "",
-    # ["Model v1",'Model v2','Module v2.2',"Module matching",'test']
+    "", # empty string can be replaced to add a small text
     ['Default model',"Module matching"]
-)
+    )
 
-# import os
-# print("Main Current Working Directory:", os.getcwd())
-# Initialize chat history and system prompt
+# Initialize chat history, this object stores all the messages to be displayed
+# An avatar is displayed based on who writes the text, either the user or the assistant
 if "messages" not in st.session_state:
-  st.session_state.messages = []  # Start with an empty chat history
-  st.session_state.welcome_message_shown = False
+    st.session_state.messages = []  # Start with an empty chat history
+    st.session_state.welcome_message_shown = False
+    # Below is nonfunctional but keeping it FYI. I use st.write for debugging just as I do when running python script
+    # st.write("Messages Initialized")
 
-if page == "Model v2":
-    st.header("Model v2",divider=True)
-    model_v2.show()
-elif page == "Default model":
-    # st.header("Default model",divider=True)
-    # st.sidebar.title("Module list")
-    # module_selection = st.selectbox("Select a module from the list", module_name_list)
-
+# 'page' variable retrived from the radio button and used to activate the corresponding page
+if page == "Default model":
     default_model.show()
 elif page == "Module matching":
-    # st.sidebar.markdown("### Modules Available:")
     st.sidebar.header("Module list",divider=True)
-    # st.sidebar.markdown("### Modules Available:")
-    st.sidebar.text("\n".join(module_name_list))
+    st.sidebar.text("\n".join(module_name_list)) # The module list is diplayed for referenced
     module_matching.show()
-elif page=='test':
-    st.header("Module matching", divider=True)
-    test.show_test()
-# elif page == "Contact":
-#     test_page.show()
-
