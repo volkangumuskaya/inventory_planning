@@ -15,10 +15,11 @@ st.set_page_config(
 )
 from subpages import initialize
 st.write('checkpoint1 streamlit-app.py')
-from subpages import module_matching # Corresponds to the page where we have modules, e.g. initalize, priortize orders, etc
-st.write('checkpoint2 streamlit-app.py')
 from subpages import default_model # Corresponds to creating and solving a math model with customized parameters
 st.write('checkpoint3 streamlit-app.py')
+from subpages import module_matching # Corresponds to the page where we have modules, e.g. initalize, priortize orders, etc
+st.write('checkpoint2 streamlit-app.py')
+
 # Create sidebar
 st.sidebar.header("**NAVIGATE**",divider=True) #This is the header. Note that **[text]** imposes bold format
 # The list of modules to be displayed for reference only
