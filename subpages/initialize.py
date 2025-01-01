@@ -8,21 +8,14 @@
 
 import streamlit as st
 import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent))
-st.write('checkpoint1 initialize.py')
 import random
-st.write('checkpoint2 initalize')
 from subpages.classes_and_generating_functions import (Customer, Order, Product, Resource,
                                                        generate_customers, generate_orders, generate_products,
                                                        generate_resources,
                                                        determine_total_quantity_per_product, print_orders,
                                                        retrieve_fulfill_times, create_main_objects)
-st.write('checkpoint3 initalize')
 from subpages.model_functions import print_product_production, add_objective_terms_v2, check_delayed_orders
-st.write('checkpoint4 initalize')
 from subpages.model_functions import create_obj_function,create_model
-st.write('checkpoint5 initalize')
 #Set of periods
 n_time_period=20
 n_resource=2
