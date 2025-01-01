@@ -164,7 +164,7 @@ def prioritize_orders():
             # This new model will then be solved
             prob_tmp = add_objective_terms_v2(
                 model=prob_tmp,
-                order_list=[st.session_state.orders[i] for i in selected_options if i != 0],
+                order_list=[st.session_state.orders[i] for i in selected_options],
                 multiplier=9, criticality=st.session_state.criticality,
                 y_f=y_tmp,
                 time_ids_f=st.session_state.time_ids)

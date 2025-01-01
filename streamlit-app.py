@@ -16,7 +16,7 @@ from subpages import default_model # Corresponds to creating and solving a math 
 st.sidebar.header("**NAVIGATION**",divider=True) #This is the header. Note that **[text]** imposes bold format
 # The list of modules to be displayed for reference only
 module_name_list = ['Initiate/create a plan',
-                    'Modify the plan',
+                    # 'Modify the plan',
                     'Get insights',
                     'Download all results / production schedule',
                     'Prioritize orders',
