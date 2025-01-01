@@ -19,7 +19,9 @@ from pathlib import Path
 # Add the root directory of the repo to sys.path
 sys.path.append(str(Path(__file__).parent))
 from subpages import initialize
-initialize.initial_run()
+if "initial_run_done" not in st.session_state or not st.session_state.initial_run_done:
+    initialize.initial_run()  # Run the initialization function
+    st.session_state.initial_run_done = True  # Set the flag to True
 
 st.write('checkpoint1 streamlit-app.py')
 from subpages import default_model # Corresponds to creating and solving a math model with customized parameters
