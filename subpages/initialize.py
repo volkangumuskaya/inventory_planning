@@ -74,7 +74,6 @@ def initial_run():
   st.session_state.min_criticality=min_criticality
   st.session_state.max_criticality=max_criticality
   st.session_state.customers = customers
-  st.write('customers initalized')
   st.session_state.time_ids = time_ids
   st.session_state.x = x
   st.session_state.y = y
