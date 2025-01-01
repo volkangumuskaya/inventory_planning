@@ -244,6 +244,7 @@ def show():
         Here, the user can interact with the model by typing queries.    
         The list of modules are on the sidebar.  
         Currently, **'Initiate/create a plan'** and **'Prioritize orders'** modules are active. 
+        This is the refactored version.
         '''
         )
 
