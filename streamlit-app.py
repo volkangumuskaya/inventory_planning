@@ -13,7 +13,7 @@ from subpages import module_matching # Corresponds to the page where we have mod
 from subpages import default_model # Corresponds to creating and solving a math model with customized parameters
 
 # Create sidebar
-st.sidebar.header("**NAVIGATION**",divider=True) #This is the header. Note that **[text]** imposes bold format
+st.sidebar.header("**NAVIGATE**",divider=True) #This is the header. Note that **[text]** imposes bold format
 # The list of modules to be displayed for reference only
 module_name_list = ['Initiate/create a plan',
                     # 'Modify the plan',
