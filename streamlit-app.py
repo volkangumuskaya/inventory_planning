@@ -13,6 +13,7 @@ st.set_page_config(
     page_title='volkan-ai',
     layout="wide"
 )
+import subpages
 st.write('checkpoint1 streamlit-app.py')
 from subpages import module_matching # Corresponds to the page where we have modules, e.g. initalize, priortize orders, etc
 st.write('checkpoint2 streamlit-app.py')
