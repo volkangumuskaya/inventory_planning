@@ -15,11 +15,7 @@ from subpages.classes_and_generating_functions import (determine_total_quantity_
 
 st.write('checkpoint3 default.py')
 def show():
-    import sys
-    from pathlib import Path
-  
-    # Add the root directory of the repo to sys.path
-    sys.path.append(str(Path(__file__).parent))  
+    st.write('checkpoint start default show.py')
     # Initialize session state for the button click
     if "show_solve_section" not in st.session_state:
         st.session_state.show_solve_section = False
