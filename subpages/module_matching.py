@@ -10,8 +10,7 @@ import re
 from pulp import value
 from subpages.classes_and_generating_functions import retrieve_fulfill_times
 from subpages.model_functions import create_model,add_objective_terms_v2, check_delayed_orders
-# WARNING!
-GROQ_API_KEY = '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'
+
 
 # LLM model used and max_tokens
 model_option = 'llama3-70b-8192'
@@ -248,8 +247,8 @@ def show():
 
     # initiate API
     client = Groq(
-        # api_key=st.secrets["GROQ_API_KEY"] # Normally this is the way to use API key
-        api_key=GROQ_API_KEY
+        api_key=st.secrets["GROQ_API_KEY"] # Normally this is the way to use API key
+        # api_key=GROQ_API_KEY
         )
 
     # Initialize some session state parameters
