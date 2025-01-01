@@ -8,9 +8,9 @@
 # If interested, some st.write's can be thrown in various points to check the order of execution.
 
 import streamlit as st
-import sys
-import Path
-sys.path.append(str(Path(__file__).parent))
+# import sys
+# import Path
+# sys.path.append(str(Path(__file__).parent))
 st.write('checkpoint1 initialize.py')
 import random
 st.write('checkpoint2 initalize')
