@@ -100,7 +100,7 @@ def show():
             st.session_state.max_criticality=max_criticality
             st.session_state.min_quantity=min_q_per_order
             st.session_state.max_quantity=max_q_per_order
-
+            st.session_state.seed=seed
             # The problem is solved using PuLP's choice of Solver
             prob.solve()
             orders = retrieve_fulfill_times(orders_tmp=orders, y_vars=y, time_periods=time_ids)
