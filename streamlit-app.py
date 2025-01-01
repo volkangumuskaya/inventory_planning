@@ -2,7 +2,7 @@
 # This app involves the following subscripts located in subpages folder.
 # Detailed explanations are provided in the corresponding scripts. For reference to understand general structure:
 #   streamlit-app.py                    : Main script executed to build the front end (i.e. streamlit page)
-#   _init__.py                          : Executed under the ood to initialize session states
+#   initialize.py                       : Executed under the ood to initialize session states
 #   classes_and_generating_functions.py : Includes class structures and helper functions to generate the objects
 #   default_model.py                    : Builds the default_model page where user can modify model parameters and solve
 #   model_functions.py                  : Includes the helper functions related to building/modifying PuLp math model
@@ -13,21 +13,15 @@ st.set_page_config(
     page_title='volkan-ai',
     layout="wide"
 )
-import sys
-from pathlib import Path
 
-# Add the root directory of the repo to sys.path
-sys.path.append(str(Path(__file__).parent))
 from subpages import initialize
 if "initial_run_done" not in st.session_state or not st.session_state.initial_run_done:
     initialize.initial_run()  # Run the initialization function
     st.session_state.initial_run_done = True  # Set the flag to True
 
-st.write('checkpoint1 streamlit-app.py')
+
 from subpages import default_model # Corresponds to creating and solving a math model with customized parameters
-st.write('checkpoint3 streamlit-app.py')
 from subpages import module_matching # Corresponds to the page where we have modules, e.g. initalize, priortize orders, etc
-st.write('checkpoint2 streamlit-app.py')
 
 # Create sidebar
 st.sidebar.header("**NAVIGATE**",divider=True) #This is the header. Note that **[text]** imposes bold format
