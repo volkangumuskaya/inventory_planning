@@ -94,6 +94,7 @@ def show():
             st.session_state.resources=resources
             st.session_state.products=products
             st.session_state.orders=orders
+            st.session_state.customers=customers
             st.session_state.time_ids=time_ids
             st.session_state.min_criticality=min_criticality
             st.session_state.max_criticality=max_criticality
