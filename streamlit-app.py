@@ -13,6 +13,11 @@ st.set_page_config(
     page_title='volkan-ai',
     layout="wide"
 )
+import sys
+from pathlib import Path
+
+# Add the root directory of the repo to sys.path
+sys.path.append(str(Path(__file__).parent))
 import subpages
 st.write('checkpoint1 streamlit-app.py')
 from subpages import default_model # Corresponds to creating and solving a math model with customized parameters
