@@ -1,9 +1,7 @@
 # This script is run under the hood to initiate the session states.
 # Observe that in subpages.module_matching, we use st.session_state vars without initializing them.
-# If we run default_model page, there we do initialize. However, even if we activate module_matching straight away
+# If we run default_model page, there we do set them explicitly. However, even if we activate module_matching straight away
 # these vars are already initialized, for example st.session_state.min_criticality.
-# It is also where we format the streamlit page via st.set_page_config (st.set_page_config should always be the first
-# streamlit command ti be run. If we added a st.write('hello') before st.set_page_config, we would get errror).
 # If interested, some st.write's can be thrown in various points to check the order of execution.
 
 import streamlit as st
