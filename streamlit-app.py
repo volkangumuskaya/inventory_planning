@@ -13,7 +13,7 @@ st.set_page_config(
     page_title='volkan-ai',
     layout="wide"
 )
-
+import subpages
 st.write('checkpoint1 streamlit-app.py')
 from subpages import default_model # Corresponds to creating and solving a math model with customized parameters
 st.write('checkpoint3 streamlit-app.py')
