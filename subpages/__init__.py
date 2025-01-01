@@ -6,16 +6,21 @@
 # It is also where we format the streamlit page via st.set_page_config (st.set_page_config should always be the first
 # streamlit command ti be run. If we added a st.write('hello') before st.set_page_config, we would get errror).
 # If interested, some st.write's can be thrown in various points to check the order of execution.
+
 import streamlit as st
+st.write('checkpoint1 init.py')
 import random
+st.write('checkpoint2 init.py')
 from subpages.classes_and_generating_functions import (Customer, Order, Product, Resource,
                                                        generate_customers, generate_orders, generate_products,
                                                        generate_resources,
                                                        determine_total_quantity_per_product, print_orders,
                                                        retrieve_fulfill_times, create_main_objects)
+st.write('checkpoint3 init.py')
 from subpages.model_functions import print_product_production, add_objective_terms_v2, check_delayed_orders
+st.write('checkpoint4 init.py')
 from subpages.model_functions import create_obj_function,create_model
-
+st.write('checkpoint5 init.py')
 #Set of periods
 n_time_period=20
 n_resource=2
