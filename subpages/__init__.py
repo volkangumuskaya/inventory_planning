@@ -7,6 +7,10 @@
 # streamlit command ti be run. If we added a st.write('hello') before st.set_page_config, we would get errror).
 # If interested, some st.write's can be thrown in various points to check the order of execution.
 import streamlit as st
+st.set_page_config(
+    page_title='volkan-ai',
+    layout="wide"
+)
 import random
 from subpages.classes_and_generating_functions import (Customer, Order, Product, Resource,
                                                        generate_customers, generate_orders, generate_products,
