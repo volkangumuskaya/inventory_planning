@@ -7,7 +7,6 @@
 # streamlit command ti be run. If we added a st.write('hello') before st.set_page_config, we would get errror).
 # If interested, some st.write's can be thrown in various points to check the order of execution.
 import streamlit as st
-
 import random
 from subpages.classes_and_generating_functions import (Customer, Order, Product, Resource,
                                                        generate_customers, generate_orders, generate_products,
@@ -29,8 +28,11 @@ max_criticality=10
 seed=50
 random.seed(seed)
 
+st.set_page_config(
+    page_title='volkan-ai',
+    layout="wide"
+)
 
-st.write('after page config')
 ##GENERATE MAIN COMPONENTS RANDOMLY
 time_ids, resources, products, customers, orders = create_main_objects(
     n_period=n_time_period, n_resource=n_resource, n_customer=n_customer, n_order=n_order,
@@ -42,7 +44,6 @@ prob_tmp, x_tmp, y_tmp, inv_tmp = create_model(
     resources=resources, products=products, customers=customers, orders=orders,
     time_ids=time_ids, min_criticality=min_criticality, max_criticality=max_criticality, seed=seed)
 prob.solve()
-st.write('after solve')
 orders = retrieve_fulfill_times(
         orders_tmp=orders,
         y_vars=y,
