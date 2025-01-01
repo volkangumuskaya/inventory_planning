@@ -8,10 +8,11 @@ import requests  # used to make API call
 
 import re
 from pulp import value
-
+st.write('checkpoint1 modeule.py')
 from subpages.classes_and_generating_functions import retrieve_fulfill_times
+st.write('checkpoint2 modeule.py')
 from subpages.model_functions import create_model,add_objective_terms_v2, check_delayed_orders
-
+st.write('checkpoint3 modeule.py')
 # WARNING!
 GROQ_API_KEY = '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'
 
