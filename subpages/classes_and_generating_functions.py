@@ -5,10 +5,10 @@ This script involves the following:
 
 2) Helper functions to reduce repetition such as generate_orders, generate_products, etc.
 Note that some are specific to our case, e.g. we have only three Product types, and they are built using;
-either Resource 0, Resource 1 or either.
+either Resource 0, Resource 1 or either. Consider it like machines or facilities. 
 
 3) A few helper function to update these objects when new solution is generated.
-Why step 3? because when we solve math model the objects are not automatically updated.
+Why step 3? because when we solve the math model, the objects are not automatically updated.
 """
 #Below are the libraries
 from dataclasses import dataclass, field
