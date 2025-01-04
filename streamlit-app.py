@@ -2,7 +2,7 @@
 # This app involves the following subscripts located in subpages folder.
 # Detailed explanations are provided in the corresponding scripts. For reference to understand general structure:
 #   streamlit-app.py                    : Main script executed to build the front end (i.e. streamlit page)
-#   initialize.py                       : Executed under the ood to initialize session states
+#   initialize.py                       : Executed under the hood to initialize session states
 #   classes_and_generating_functions.py : Includes class structures and helper functions to generate the objects
 #   default_model.py                    : Builds the default_model page where user can modify model parameters and solve
 #   model_functions.py                  : Includes the helper functions related to building/modifying PuLp math model
